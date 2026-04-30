@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CashTube</title>
+
+<style>
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+}
+
+.page {
+    display: none;
+    min-height: 100vh;
+}
+
+/* PAGE 1 */
+#page1 {
+    background: linear-gradient(180deg, #6a00ff, #ff4db8);
+    padding: 15px;
+}
+
+.top-icons {
+    display: flex;
+    justify-content: space-between;
+}
+
+.logo, .menu {
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    color:white;
+}
+
+.logo { background: hotpink; }
+.menu { background: #6a00ff; }
+
+.container {
+    background: white;
+    padding: 25px;
+    border-radius: 25px;
+    max-width: 400px;
+    margin: 40px auto;
+    text-align: center;
+}
+
+input {
+    width: 100%;
+    padding: 14px;
+    margin: 10px 0;
+    border-radius: 12px;
+    border: 1px solid #ddd;
+}
+
+/* KEYPAD */
+.keypad {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+}
+
+.keypad button {
+    padding: 18px;
+    border-radius: 12px;
+    border: none;
+}
+
+/* BUTTONS */
+.actions {
+    display: flex;
+    gap: 10px;
+}
+
+.actions button {
+    flex: 1;
+    padding: 14px;
+    background: #ff4db8;
+    color: white;
+    border: none;
+    border-radius: 12px;
+}
+
+.btn {
+    width: 100%;
+    padding: 16px;
+    background: #6a00ff;
+    color: white;
+    border: none;
+    border-radius: 12px;
+}
+
+.footer-links {
+    background: white;
+    padding: 10px;
+    text-align: center;
+    border-radius: 10px;
+}
+
+.footer-links a {
+    margin: 0 8px;
+    color: #6a00ff;
+    font-size: 13px;
+    text-decoration: none;
+}
+
+/* PAGE 2 */
+#page2 {
+    background: #f5f5f5;
+    padding: 20px;
+}
+
+.note {
+    background: #f9f9f9;
+    padding: 15px;
+    border-left: 4px solid #6a00ff;
+    margin-top: 15px;
+    border-radius: 10px;
+}
+
+/* PAGE 3 */
+#page3 {
+    background: #f2f2f2;
+}
+
+.header {
+    background: #2d2f5b;
+    color: white;
+    padding: 18px;
+    text-align: center;
+}
+
+.card {
+    background: white;
+    margin: 20px;
+    padding: 25px;
+    border-radius: 20px;
+}
+
+/* PAGE 5 */
+#page5 {
+    background: #f5f5f5;
+}
+
+.topbar {
+    display: flex;
+    justify-content: space-between;
+    padding: 15px;
+    background: #eee;
+}
+
+.transferBox {
+    background: white;
+    margin: 20px;
+    padding: 20px;
+    border-radius: 15px;
+    text-align: center;
+}
+
+.row {
+    display: flex;
+    justify-content: space-between;
+    margin: 10px 0;
+}
+
+.copy {
+    color: blue;
+    cursor: pointer;
+}
+
+.warning {
+    border: 2px solid red;
+    padding: 10px;
+    margin-top: 15px;
+    border-radius: 10px;
+}
+
+.payBtn {
+    width: 100%;
+    padding: 16px;
+    background: orange;
+    color: white;
+    border: none;
+    border-radius: 12px;
+    margin-top: 20px;
+}
+
+/* PAGE 4 */
+#page4 {
+    background: #f2f2f2;
+}
+
+/* CLICK EFFECT */
+button:active {
+    transform: scale(0.96);
+}
+</style>
+</head>
+
+<body>
+
+<!-- PAGE 1 -->
+<div id="page1" class="page">
+<div class="top-icons">
+    <div class="logo">🙂</div>
+    <div class="menu">≡</div>
+</div>
+
+<div class="container">
+    <h2>Welcome to Cash Tube</h2>
+    <p>Enter your 5-digit code</p>
+
+    <input type="text" id="codeInput" readonly maxlength="5">
+
+    <div class="keypad">
+        <button onclick="addNum(1)">1</button>
+        <button onclick="addNum(2)">2</button>
+        <button onclick="addNum(3)">3</button>
+        <button onclick="addNum(4)">4</button>
+        <button onclick="addNum(5)">5</button>
+        <button onclick="addNum(6)">6</button>
+        <button onclick="addNum(7)">7</button>
+        <button onclick="addNum(8)">8</button>
+        <button onclick="addNum(9)">9</button>
+    </div>
+
+    <div class="actions">
+        <button onclick="goSignup()">Sign Up</button>
+        <button onclick="clearInput()">Clear</button>
+        <button onclick="login()">Login</button>
+    </div>
+</div>
+
+<div class="footer-links">
+    <a href="#">Sign Up with Crypto</a>
+    <a href="#">Terms</a>
+    <a href="#">Privacy</a>
+</div>
+</div>
+
+<!-- PAGE 2 -->
+<div id="page2" class="page">
+<div class="container">
+    <h2 style="color:#6a00ff;">Buy Your Passcode</h2>
+
+    <p>
+        Fill in your details. Your CASH-TUBE passcode will be reviewed and sent after payment confirmation.
+    </p>
+
+    <input type="text" id="name" placeholder="Full Name">
+    <input type="number" id="phone" placeholder="Phone Number">
+    <input type="text" value="₦6,500" readonly>
+
+    <button class="btn" onclick="goPayment()">Proceed to Payment</button>
+
+    <div class="note">
+        <b>Note:</b> You must pay ₦6,500 to gain access to the platform.
+    </div>
+</div>
+</div>
+
+<!-- PAGE 3 (PERFECT FIX) -->
+<div id="page3" class="page">
+    <div class="header">CashTube Secure Payment</div>
+
+    <div class="card">
+        <h3>Complete Your Payment</h3>
+        <p>Pay ₦6,500 to activate your account</p>
+
+        <input type="text" value="₦6,500" readonly>
+        <input type="text" id="fullname" placeholder="Full Name">
+        <input type="email" id="email" placeholder="Email Address">
+
+        <button class="btn" onclick="payNow()">Proceed to Payment</button>
+
+        <div style="font-size:13px; color:gray; text-align:center;">
+            Secured checkout • Your details are encrypted
+        </div>
+    </div>
+</div>
+
+<!-- PAGE 5 -->
+<div id="page5" class="page">
+<div class="topbar">
+    <span>Bank Transfer</span>
+    <span style="color:red;" onclick="showPage('page3')">Cancel</span>
+</div>
+
+<div class="transferBox">
+    <h2>NGN 6,500</h2>
+    <p id="transferEmail"></p>
+    <p>Proceed to your bank app to complete this transfer.</p>
+
+    <hr>
+
+    <div class="row">
+        <span>Amount</span>
+        <span><b>NGN 6,500</b></span>
+    </div>
+
+    <div class="row">
+        <span>Account Number</span>
+        <span class="copy" onclick="copyText('9736975047')">9736975047</span>
+    </div>
+
+    <div class="row">
+        <span>Bank</span>
+        <span>Paystack Titan</span>
+    </div>
+
+    <div class="row">
+        <span>Account Name</span>
+        <span>KA | TS AGENT</span>
+    </div>
+
+    <div class="warning">
+        WARNING: Do NOT use Opay and Kuda for this transfer.
+    </div>
+
+    <button class="payBtn" onclick="confirmTransfer(event)">
+        I have made this Transfer
+    </button>
+</div>
+</div>
+
+<!-- PAGE 4 -->
+<div id="page4" class="page">
+<div class="header">Payment Status</div>
+
+<div class="card">
+    <h2 style="color:green;">✔ Payment Successful</h2>
+    <p>Your account has been activated.</p>
+
+    <button class="btn" onclick="goDashboard()">Continue</button>
+</div>
+</div>
+
+<!-- PAGE 6 -->
+<div id="page6" class="page">
+<div class="topbar">
+    <span>Bank Transfer</span>
+    <span style="color:red;" onclick="showPage('page3')">Cancel</span>
+</div>
+
+<div class="transferBox">
+    <h2>NGN 6,500</h2>
+    <p id="failEmail"></p>
+    <p>Proceed to your bank app to complete this transfer.</p>
+
+    <hr>
+
+    <h3 style="color:red;">Transaction verification failed!</h3>
+    <p>Your payment could not be completed.</p>
+    <p>Reason: Unable to validate account / invalid mobile money account.</p>
+
+    <button class="btn" style="background:#ccc; color:black;">
+        Access code unavailable
+    </button>
+</div>
+</div>
+
+<script>
+showPage("page1");
+
+function showPage(id) {
+    document.querySelectorAll(".page").forEach(p => p.style.display = "none");
+    document.getElementById(id).style.display = "block";
+}
+
+function addNum(num) {
+    let input = document.getElementById("codeInput");
+    if (input.value.length < 5) input.value += num;
+}
+
+function clearInput() {
+    document.getElementById("codeInput").value = "";
+}
+
+function goSignup() {
+    showPage("page2");
+}
+
+function login() {
+    alert("You must Sign Up first!");
+}
+
+function goPayment() {
+    let name = document.getElementById("name").value;
+    let phone = document.getElementById("phone").value;
+
+    if (!name || !phone) {
+        alert("Fill all details!");
+        return;
+    }
+
+    document.getElementById("fullname").value = name;
+    showPage("page3");
+}
+
+function payNow() {
+    let email = document.getElementById("email").value;
+
+    if (!email) {
+        alert("Enter email!");
+        return;
+    }
+
+    document.getElementById("transferEmail").innerText = email;
+    showPage("page5");
+}
+
+function confirmTransfer(event) {
+    let btn = event.target;
+    btn.innerText = "Verifying...";
+    btn.disabled = true;
+
+    setTimeout(() => {
+        document.getElementById("failEmail").innerText =
+            document.getElementById("transferEmail").innerText;
+
+        showPage("page6");
+
+        btn.innerText = "I have made this Transfer";
+        btn.disabled = false;
+    }, 6000);
+}
+
+function copyText(text) {
+    navigator.clipboard.writeText(text);
+    alert("Copied: " + text);
+}
+
+function goDashboard() {
+    alert("Dashboard coming next...");
+}
+</script>
+
+</body>
+</html>
