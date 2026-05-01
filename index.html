@@ -6,9 +6,12 @@
 <title>CashTube</title>
 
 <style>
+* { box-sizing: border-box; }
 body {
     margin: 0;
-    font-family: Arial, sans-serif;
+    font-family: 'Segoe UI', Arial, sans-serif;
+    overflow-x: hidden;
+    background: #1a1a2e;
 }
 
 .page {
@@ -16,29 +19,74 @@ body {
     min-height: 100vh;
 }
 
-/* PAGE 1 */
+/* ========== PAGE 1 - LOGIN ========== */
 #page1 {
     background: linear-gradient(180deg, #6a00ff, #ff4db8);
     padding: 15px;
+    position: relative;
 }
 
 .top-icons {
     display: flex;
     justify-content: space-between;
+    align-items: center;
 }
 
 .logo, .menu {
     width: 45px;
     height: 45px;
     border-radius: 50%;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    color:white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    cursor: pointer;
+    user-select: none;
 }
 
-.logo { background: hotpink; }
-.menu { background: #6a00ff; }
+.logo { 
+    background: hotpink; 
+    font-size: 24px;
+}
+
+.menu { 
+    background: #6a00ff; 
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.menu-dropdown {
+    display: none;
+    position: absolute;
+    top: 70px;
+    left: 15px;
+    background: white;
+    border-radius: 15px;
+    padding: 20px;
+    min-width: 200px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+    z-index: 100;
+    animation: slideDown 0.3s ease;
+}
+
+.menu-dropdown.active { display: block; }
+
+.menu-item {
+    padding: 12px 0;
+    color: #333;
+    font-size: 18px;
+    cursor: pointer;
+    border-bottom: 1px solid #eee;
+    transition: color 0.2s;
+}
+
+.menu-item:last-child { border-bottom: none; }
+.menu-item:hover { color: #6a00ff; }
+
+@keyframes slideDown {
+    from { opacity: 0; transform: translateY(-10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
 
 .container {
     background: white;
@@ -55,25 +103,40 @@ input {
     margin: 10px 0;
     border-radius: 12px;
     border: 1px solid #ddd;
+    font-size: 16px;
 }
 
-/* KEYPAD */
+#codeInput {
+    font-size: 24px;
+    text-align: center;
+    letter-spacing: 8px;
+    font-weight: bold;
+    color: #333;
+}
+
 .keypad {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 10px;
+    margin: 15px 0;
 }
 
 .keypad button {
     padding: 18px;
     border-radius: 12px;
     border: none;
+    background: #f5f5f5;
+    font-size: 18px;
+    cursor: pointer;
+    transition: background 0.2s;
 }
 
-/* BUTTONS */
+.keypad button:hover { background: #e0e0e0; }
+
 .actions {
     display: flex;
     gap: 10px;
+    margin-top: 10px;
 }
 
 .actions button {
@@ -83,6 +146,9 @@ input {
     color: white;
     border: none;
     border-radius: 12px;
+    cursor: pointer;
+    font-size: 14px;
+    text-decoration: underline;
 }
 
 .btn {
@@ -92,23 +158,240 @@ input {
     color: white;
     border: none;
     border-radius: 12px;
+    cursor: pointer;
+    font-size: 16px;
+    margin: 10px 0;
 }
 
 .footer-links {
     background: white;
-    padding: 10px;
+    padding: 15px;
     text-align: center;
     border-radius: 10px;
+    max-width: 400px;
+    margin: 0 auto;
 }
 
 .footer-links a {
     margin: 0 8px;
     color: #6a00ff;
-    font-size: 13px;
+    font-size: 14px;
     text-decoration: none;
 }
 
-/* PAGE 2 */
+/* ========== LOGIN SUCCESS MODAL ========== */
+.modal-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.6);
+    z-index: 300;
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-overlay.active { display: flex; }
+
+.modal-box {
+    background: white;
+    padding: 40px 30px;
+    border-radius: 20px;
+    text-align: center;
+    max-width: 320px;
+    width: 90%;
+    animation: popIn 0.3s ease;
+}
+
+@keyframes popIn {
+    from { transform: scale(0.8); opacity: 0; }
+    to { transform: scale(1); opacity: 1; }
+}
+
+.check-circle {
+    width: 80px;
+    height: 80px;
+    border: 4px solid #90EE90;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 20px;
+}
+
+.check-circle::after {
+    content: "✓";
+    color: #90EE90;
+    font-size: 40px;
+    font-weight: bold;
+}
+
+.modal-box h2 {
+    color: #333;
+    margin: 10px 0;
+    font-size: 28px;
+}
+
+.modal-box p {
+    color: #666;
+    margin-bottom: 25px;
+    font-size: 16px;
+}
+
+.ok-btn {
+    padding: 12px 40px;
+    background: #6a5acd;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    font-size: 16px;
+    cursor: pointer;
+    box-shadow: 0 4px 0 #483d8b;
+}
+
+.ok-btn:active {
+    transform: translateY(4px);
+    box-shadow: 0 0 0 #483d8b;
+}
+
+/* ========== CONTACT OVERLAY ========== */
+.contact-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: white;
+    z-index: 200;
+    overflow-y: auto;
+    animation: fadeIn 0.3s ease;
+}
+
+.contact-overlay.active { display: block; }
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+.contact-header {
+    background: #6a00ff;
+    color: white;
+    padding: 40px 20px;
+    text-align: center;
+    position: relative;
+}
+
+.contact-header h1 {
+    margin: 0 0 10px 0;
+    font-size: 28px;
+}
+
+.contact-header p {
+    margin: 0;
+    opacity: 0.9;
+    font-size: 16px;
+}
+
+.back-btn {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    background: rgba(255,255,255,0.2);
+    border: none;
+    color: white;
+    padding: 10px 15px;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.contact-body {
+    padding: 20px;
+    max-width: 500px;
+    margin: 0 auto;
+}
+
+.contact-card {
+    background: white;
+    border-radius: 20px;
+    padding: 25px;
+    margin-top: 20px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+}
+
+.contact-card h2 {
+    color: #6a00ff;
+    margin-top: 0;
+    font-size: 22px;
+}
+
+.contact-info-item {
+    display: flex;
+    align-items: center;
+    margin: 15px 0;
+    font-size: 16px;
+    color: #333;
+}
+
+.contact-info-item span:first-child {
+    margin-right: 10px;
+    font-size: 20px;
+}
+
+.contact-info-item strong { color: #333; }
+
+.help-section { margin-top: 25px; }
+
+.help-section h2 {
+    color: #6a00ff;
+    font-size: 22px;
+}
+
+.help-item {
+    display: flex;
+    align-items: flex-start;
+    margin: 12px 0;
+    font-size: 16px;
+    color: #333;
+}
+
+.help-item span {
+    color: #6a00ff;
+    margin-right: 10px;
+    font-size: 20px;
+}
+
+.whatsapp-box {
+    background: #f8f0ff;
+    border-radius: 15px;
+    padding: 20px;
+    margin-top: 25px;
+    text-align: center;
+}
+
+.whatsapp-box p {
+    margin: 0;
+    color: #6a00ff;
+    font-size: 16px;
+}
+
+.overlay-backdrop {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 50;
+}
+
+.overlay-backdrop.active { display: block; }
+
+/* ========== PAGE 2 - SIGNUP ========== */
 #page2 {
     background: #f5f5f5;
     padding: 20px;
@@ -120,9 +403,10 @@ input {
     border-left: 4px solid #6a00ff;
     margin-top: 15px;
     border-radius: 10px;
+    font-size: 14px;
 }
 
-/* PAGE 3 */
+/* ========== PAGE 3 - PAYMENT ========== */
 #page3 {
     background: #f2f2f2;
 }
@@ -132,6 +416,7 @@ input {
     color: white;
     padding: 18px;
     text-align: center;
+    font-size: 18px;
 }
 
 .card {
@@ -141,7 +426,7 @@ input {
     border-radius: 20px;
 }
 
-/* PAGE 5 */
+/* ========== PAGE 5 - BANK TRANSFER ========== */
 #page5 {
     background: #f5f5f5;
 }
@@ -151,7 +436,11 @@ input {
     justify-content: space-between;
     padding: 15px;
     background: #eee;
+    align-items: center;
 }
+
+.topbar span:first-child { font-weight: bold; }
+.topbar span[onclick] { cursor: pointer; font-weight: bold; }
 
 .transferBox {
     background: white;
@@ -164,19 +453,28 @@ input {
 .row {
     display: flex;
     justify-content: space-between;
-    margin: 10px 0;
+    margin: 12px 0;
+    padding: 8px 0;
+    border-bottom: 1px solid #eee;
+    font-size: 14px;
 }
+
+.row:last-of-type { border-bottom: none; }
 
 .copy {
     color: blue;
     cursor: pointer;
+    text-decoration: underline;
 }
 
 .warning {
     border: 2px solid red;
-    padding: 10px;
+    padding: 12px;
     margin-top: 15px;
     border-radius: 10px;
+    color: red;
+    font-size: 13px;
+    font-weight: bold;
 }
 
 .payBtn {
@@ -187,257 +485,490 @@ input {
     border: none;
     border-radius: 12px;
     margin-top: 20px;
+    cursor: pointer;
+    font-size: 16px;
 }
 
-/* PAGE 4 */
+/* ========== PAGE 4 - PAYMENT SUCCESS ========== */
 #page4 {
     background: #f2f2f2;
 }
 
-/* CLICK EFFECT */
-button:active {
-    transform: scale(0.96);
+/* ========== PAGE 6 - PAYMENT FAILED ========== */
+#page6 {
+    background: #f5f5f5;
 }
+
+/* ========== DASHBOARD (PAGE 7) ========== */
+#page7 {
+    background: #1e293b;
+    min-height: 100vh;
+    padding-bottom: 80px;
+}
+
+.withdraw-section {
+    padding: 0 20px 20px;
+    margin-top: 10px;
+}
+
+.dashboard-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    color: white;
+}
+
+.user-info {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.user-avatar {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: #2dd4bf;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    border: 3px solid #a3e635;
+}
+
+.user-greeting h2 {
+    margin: 0;
+    font-size: 20px;
+}
+
+.user-greeting p {
+    margin: 4px 0 0 0;
+    color: #94a3b8;
+    font-size: 14px;
+}
+
+.toggle-btn {
+    background: #2dd4bf;
+    color: white;
+    border: none;
+    padding: 10px 16px;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 13px;
+    font-weight: bold;
+}
+
+.balance-card {
+    background: linear-gradient(135deg, #2dd4bf, #34d399);
+    margin: 0 20px 20px;
+    padding: 25px;
+    border-radius: 20px;
+    color: white;
+}
+
+.balance-card p {
+    margin: 0 0 8px 0;
+    font-size: 14px;
+    opacity: 0.9;
+}
+
+.balance-card h1 {
+    margin: 0;
+    font-size: 36px;
+    font-weight: bold;
+}
+
+.earn-section {
+    padding: 0 20px;
+}
+
+.earn-section h2 {
+    color: white;
+    font-size: 22px;
+    margin-bottom: 15px;
+}
+
+.video-container {
+    background: #0f172a;
+    border-radius: 20px;
+    overflow: hidden;
+    position: relative;
+    aspect-ratio: 16/9;
+}
+
+.video-container video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.video-placeholder {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #64748b;
+    font-size: 16px;
+}
+
+.earn-hint {
+    text-align: center;
+    color: #94a3b8;
+    margin-top: 15px;
+    font-size: 14px;
+}
+
+.earn-hint span {
+    color: #f87171;
+    font-weight: bold;
+}
+
+/* Pull to refresh indicator */
+/* Bottom Nav */
+.bottom-nav {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: #0f172a;
+    display: flex;
+    justify-content: space-around;
+    padding: 12px 0;
+    border-top: 1px solid #334155;
+    z-index: 100;
+}
+
+.nav-item {
+    color: #94a3b8;
+    text-decoration: none;
+    font-size: 14px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    cursor: pointer;
+    transition: color 0.2s;
+}
+
+.nav-item.active, .nav-item:hover {
+    color: #2dd4bf;
+}
+
+.withdraw-form {
+    margin-top: 10px;
+}
+
+.dark-input {
+    width: 100%;
+    background: transparent;
+    border: none;
+    border-bottom: 2px solid #475569;
+    padding: 15px 0;
+    color: white;
+    font-size: 16px;
+    margin-bottom: 20px;
+    outline: none;
+    transition: border-color 0.3s;
+}
+
+.dark-input::placeholder {
+    color: #64748b;
+}
+
+.dark-input:focus {
+    border-bottom-color: #2dd4bf;
+}
+
+.withdraw-btn {
+    width: 100%;
+    padding: 16px;
+    background: #2dd4bf;
+    color: white;
+    border: none;
+    border-radius: 12px;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+    margin-top: 20px;
+    transition: background 0.2s;
+}
+
+.withdraw-btn:hover {
+    background: #14b8a6;
+}
+
+.crypto-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: #0f172a;
+    color: white;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 30px;
+    margin-top: 30px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.crypto-icon {
+    width: 36px;
+    height: 36px;
+    background: #2dd4bf;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 18px;
+}
+
+/* ========== RECEIPT PAGE (PAGE 9) ========== */
+#page9 {
+    background: #1e293b;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+
+.receipt-container {
+    text-align: center;
+    width: 100%;
+    max-width: 400px;
+}
+
+.receipt-check {
+    width: 60px;
+    height: 60px;
+    background: #22c55e;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 20px;
+    font-size: 30px;
+    color: white;
+}
+
+.receipt-title {
+    color: #22c55e;
+    font-size: 24px;
+    font-weight: bold;
+    margin: 0 0 10px 0;
+}
+
+.receipt-amount {
+    color: white;
+    font-size: 36px;
+    font-weight: bold;
+    margin: 0 0 30px 0;
+}
+
+.receipt-card {
+    background: #2d3748;
+    border-radius: 20px;
+    padding: 25px;
+    margin-bottom: 30px;
+}
+
+.receipt-card h3 {
+    color: white;
+    margin: 0 0 20px 0;
+    font-size: 18px;
+    text-align: center;
+}
+
+.receipt-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 12px 0;
+    border-bottom: 1px solid #4a5568;
+    color: #a0aec0;
+    font-size: 14px;
+}
+
+.receipt-row:last-child {
+    border-bottom: none;
+}
+
+.receipt-row span:last-child {
+    color: white;
+    font-weight: 500;
+}
+
+.back-home-btn {
+    width: 100%;
+    padding: 16px;
+    background: linear-gradient(90deg, #ec4899, #2dd4bf);
+    color: white;
+    border: none;
+    border-radius: 30px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+/* ========== GENERAL ========== */
+button:active { transform: scale(0.96); }
+
+/* Toast notification */
+.toast {
+    position: fixed;
+    bottom: 100px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #2dd4bf;
+    color: white;
+    padding: 12px 24px;
+    border-radius: 10px;
+    font-size: 14px;
+    z-index: 400;
+    opacity: 0;
+    transition: opacity 0.3s;
+    pointer-events: none;
+}
+
+.toast.show { opacity: 1; }
 </style>
 </head>
 
 <body>
 
-<!-- PAGE 1 -->
-<div id="page1" class="page">
-<div class="top-icons">
-    <div class="logo">🙂</div>
-    <div class="menu">≡</div>
-</div>
+<!-- Overlay Backdrop -->
+<div class="overlay-backdrop" id="backdrop" onclick="closeMenu()"></div>
 
-<div class="container">
-    <h2>Welcome to Cash Tube</h2>
-    <p>Enter your 5-digit code</p>
-
-    <input type="text" id="codeInput" readonly maxlength="5">
-
-    <div class="keypad">
-        <button onclick="addNum(1)">1</button>
-        <button onclick="addNum(2)">2</button>
-        <button onclick="addNum(3)">3</button>
-        <button onclick="addNum(4)">4</button>
-        <button onclick="addNum(5)">5</button>
-        <button onclick="addNum(6)">6</button>
-        <button onclick="addNum(7)">7</button>
-        <button onclick="addNum(8)">8</button>
-        <button onclick="addNum(9)">9</button>
-    </div>
-
-    <div class="actions">
-        <button onclick="goSignup()">Sign Up</button>
-        <button onclick="clearInput()">Clear</button>
-        <button onclick="login()">Login</button>
+<!-- SIGNUP PROMPT MODAL -->
+<div class="modal-overlay" id="signupPromptModal">
+    <div class="modal-box">
+        <div class="check-circle" style="border-color: #ff6b6b;">
+            <span style="color: #ff6b6b; font-size: 40px;">!</span>
+        </div>
+        <h2 style="color: #ff6b6b;">Access Denied</h2>
+        <p>You need a valid passcode to login.<br>Sign up to get your code.</p>
+        <button class="ok-btn" style="background: #ff6b6b; box-shadow: 0 4px 0 #c92a2a;" onclick="closeSignupPrompt(); goSignup();">Sign Up</button>
+        <br><br>
+        <button class="ok-btn" style="background: #6c757d; box-shadow: 0 4px 0 #495057; font-size: 14px; padding: 10px 30px;" onclick="closeSignupPrompt()">Cancel</button>
     </div>
 </div>
 
-<div class="footer-links">
-    <a href="#">Sign Up with Crypto</a>
-    <a href="#">Terms</a>
-    <a href="#">Privacy</a>
-</div>
-</div>
-
-<!-- PAGE 2 -->
-<div id="page2" class="page">
-<div class="container">
-    <h2 style="color:#6a00ff;">Buy Your Passcode</h2>
-
-    <p>
-        Fill in your details. Your CASH-TUBE passcode will be reviewed and sent after payment confirmation.
-    </p>
-
-    <input type="text" id="name" placeholder="Full Name">
-    <input type="number" id="phone" placeholder="Phone Number">
-    <input type="text" value="₦6,500" readonly>
-
-    <button class="btn" onclick="goPayment()">Proceed to Payment</button>
-
-    <div class="note">
-        <b>Note:</b> You must pay ₦6,500 to gain access to the platform.
+<!-- LOGIN SUCCESS MODAL -->
+<div class="modal-overlay" id="loginModal">
+    <div class="modal-box">
+        <div class="check-circle"></div>
+        <h2>Good job!</h2>
+        <p>Login successful</p>
+        <button class="ok-btn" onclick="goDashboard()">OK</button>
     </div>
 </div>
-</div>
 
-<!-- PAGE 3 (PERFECT FIX) -->
-<div id="page3" class="page">
-    <div class="header">CashTube Secure Payment</div>
-
-    <div class="card">
-        <h3>Complete Your Payment</h3>
-        <p>Pay ₦6,500 to activate your account</p>
-
-        <input type="text" value="₦6,500" readonly>
-        <input type="text" id="fullname" placeholder="Full Name">
-        <input type="email" id="email" placeholder="Email Address">
-
-        <button class="btn" onclick="payNow()">Proceed to Payment</button>
-
-        <div style="font-size:13px; color:gray; text-align:center;">
-            Secured checkout • Your details are encrypted
+<!-- CONTACT OVERLAY -->
+<div class="contact-overlay" id="contactOverlay">
+    <div class="contact-header">
+        <button class="back-btn" onclick="closeContact()">← Back</button>
+        <h1>Contact Our Support Team</h1>
+        <p>We're here to help with anything you need!</p>
+    </div>
+    <div class="contact-body">
+        <div class="contact-card">
+            <h2>Contact Information</h2>
+            <div class="contact-info-item">
+                <span>📞</span>
+                <span>Telegram Username: <strong>@costomercafe</strong></span>
+            </div>
+            <div class="contact-info-item">
+                <span>🕐</span>
+                <span>Availability: <strong>24/7</strong></span>
+            </div>
+            <div class="contact-info-item">
+                <span>⏳</span>
+                <span>Response Time: <strong>Usually within 24 hours</strong></span>
+            </div>
+        </div>
+        <div class="help-section">
+            <h2>We Can Help With:</h2>
+            <div class="help-item">
+                <span>✓</span>
+                <span>Inquiries about Passcode Purchases</span>
+            </div>
+            <div class="help-item">
+                <span>✓</span>
+                <span>Technical Support for Login/Access Issues</span>
+            </div>
+            <div class="help-item">
+                <span>✓</span>
+                <span>Order Verifications and Refund Requests</span>
+            </div>
+        </div>
+        <div class="whatsapp-box">
+            <p>👉 Send us a WhatsApp message anytime — we're ready to assist you!</p>
         </div>
     </div>
 </div>
 
-<!-- PAGE 5 -->
-<div id="page5" class="page">
-<div class="topbar">
-    <span>Bank Transfer</span>
-    <span style="color:red;" onclick="showPage('page3')">Cancel</span>
-</div>
-
-<div class="transferBox">
-    <h2>NGN 6,500</h2>
-    <p id="transferEmail"></p>
-    <p>Proceed to your bank app to complete this transfer.</p>
-
-    <hr>
-
-    <div class="row">
-        <span>Amount</span>
-        <span><b>NGN 6,500</b></span>
+<!-- PAGE 1 - LOGIN -->
+<div id="page1" class="page">
+    <div class="top-icons">
+        <div class="logo">
+            <svg width="30" height="30" viewBox="0 0 40 40" fill="none">
+                <circle cx="20" cy="20" r="18" fill="#ff1493"/>
+                <path d="M12 16C12 16 14 14 16 14C18 14 20 16 20 16" stroke="white" stroke-width="2" stroke-linecap="round"/>
+                <path d="M20 16C20 16 22 14 24 14C26 14 28 16 28 16" stroke="white" stroke-width="2" stroke-linecap="round"/>
+                <circle cx="14" cy="12" r="3" fill="white"/>
+                <circle cx="26" cy="12" r="3" fill="white"/>
+                <text x="12" y="11" font-size="6" fill="#ff1493" font-weight="bold">▶️</text>
+                <text x="24" y="11" font-size="6" fill="#ff1493" font-weight="bold">$</text>
+                <path d="M14 26C14 26 17 29 20 29C23 29 26 26 26 26" stroke="white" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+        </div>
+        <div class="menu" id="menuBtn" onclick="toggleMenu()">
+            <span style="font-size:22px;">☰</span>
+            <span style="font-size:10px; display:block; margin-top:-5px;">Menu</span>
+        </div>
     </div>
 
-    <div class="row">
-        <span>Account Number</span>
-        <span class="copy" onclick="copyText('9736975047')">9736975047</span>
+    <div class="menu-dropdown" id="menuDropdown">
+        <div class="menu-item" onclick="showPage('page1'); closeMenu()">Home</div>
+        <div class="menu-item" onclick="showPage('page2'); closeMenu()">About</div>
+        <div class="menu-item" onclick="openContact()">Contact</div>
     </div>
 
-    <div class="row">
-        <span>Bank</span>
-        <span>Paystack Titan</span>
+    <div class="container">
+        <h2 style="font-size:28px; margin-bottom:8px;">Welcome to Cash Tube</h2>
+        <p style="color:#666; font-size:16px; margin-bottom:25px;">Enter your 5-digit code</p>
+
+        <input type="text" id="codeInput" readonly maxlength="5" placeholder="" style="font-size:28px; letter-spacing:12px; text-align:center; padding:20px; border:2px solid #ddd; margin-bottom:25px;">
+
+        <div class="keypad">
+            <button onclick="addNum(1)">1</button>
+            <button onclick="addNum(2)">2</button>
+            <button onclick="addNum(3)">3</button>
+            <button onclick="addNum(4)">4</button>
+            <button onclick="addNum(5)">5</button>
+            <button onclick="addNum(6)">6</button>
+            <button onclick="addNum(7)">7</button>
+            <button onclick="addNum(8)">8</button>
+            <button onclick="addNum(9)">9</button>
+        </div>
+
+        <div class="actions">
+            <button onclick="goSignup()">Sign Up</button>
+            <button onclick="clearInput()">Clear</button>
+            <button onclick="login()">Login</button>
+        </div>
     </div>
 
-    <div class="row">
-        <span>Account Name</span>
-        <span>KA | TS AGENT</span>
+    <div class="footer-links">
+        <a href="#">Sign Up with Crypto</a>
+        <a href="#">Terms of Service</a>
+        <a href="#">Privacy Policy</a>
     </div>
-
-    <div class="warning">
-        WARNING: Do NOT use Opay and Kuda for this transfer.
-    </div>
-
-    <button class="payBtn" onclick="confirmTransfer(event)">
-        I have made this Transfer
-    </button>
-</div>
 </div>
 
-<!-- PAGE 4 -->
-<div id="page4" class="page">
-<div class="header">Payment Status</div>
-
-<div class="card">
-    <h2 style="color:green;">✔ Payment Successful</h2>
-    <p>Your account has been activated.</p>
-
-    <button class="btn" onclick="goDashboard()">Continue</button>
-</div>
-</div>
-
-<!-- PAGE 6 -->
-<div id="page6" class="page">
-<div class="topbar">
-    <span>Bank Transfer</span>
-    <span style="color:red;" onclick="showPage('page3')">Cancel</span>
-</div>
-
-<div class="transferBox">
-    <h2>NGN 6,500</h2>
-    <p id="failEmail"></p>
-    <p>Proceed to your bank app to complete this transfer.</p>
-
-    <hr>
-
-    <h3 style="color:red;">Transaction verification failed!</h3>
-    <p>Your payment could not be completed.</p>
-    <p>Reason: Unable to validate account / invalid mobile money account.</p>
-
-    <button class="btn" style="background:#ccc; color:black;">
-        Access code unavailable
-    </button>
-</div>
-</div>
-
-<script>
-showPage("page1");
-
-function showPage(id) {
-    document.querySelectorAll(".page").forEach(p => p.style.display = "none");
-    document.getElementById(id).style.display = "block";
-}
-
-function addNum(num) {
-    let input = document.getElementById("codeInput");
-    if (input.value.length < 5) input.value += num;
-}
-
-function clearInput() {
-    document.getElementById("codeInput").value = "";
-}
-
-function goSignup() {
-    showPage("page2");
-}
-
-function login() {
-    alert("You must Sign Up first!");
-}
-
-function goPayment() {
-    let name = document.getElementById("name").value;
-    let phone = document.getElementById("phone").value;
-
-    if (!name || !phone) {
-        alert("Fill all details!");
-        return;
-    }
-
-    document.getElementById("fullname").value = name;
-    showPage("page3");
-}
-
-function payNow() {
-    let email = document.getElementById("email").value;
-
-    if (!email) {
-        alert("Enter email!");
-        return;
-    }
-
-    document.getElementById("transferEmail").innerText = email;
-    showPage("page5");
-}
-
-function confirmTransfer(event) {
-    let btn = event.target;
-    btn.innerText = "Verifying...";
-    btn.disabled = true;
-
-    setTimeout(() => {
-        document.getElementById("failEmail").innerText =
-            document.getElementById("transferEmail").innerText;
-
-        showPage("page6");
-
-        btn.innerText = "I have made this Transfer";
-        btn.disabled = false;
-    }, 6000);
-}
-
-function copyText(text) {
-    navigator.clipboard.writeText(text);
-    alert("Copied: " + text);
-}
-
-function goDashboard() {
-    alert("Dashboard coming next...");
-}
-</script>
-
-</body>
-</html>
+<!-- PAGE 2 - SIGNUP -->
+<div id="page2" class="page">
+    <div class="container" style="max-width:100%; margin:0; borde
