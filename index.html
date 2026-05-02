@@ -813,6 +813,54 @@ input {
     cursor: pointer;
 }
 
+/* ========== WITHDRAWAL NOTIFICATION POPUP ========== */
+.withdraw-notification {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background: #1a1a2e;
+    border-radius: 16px;
+    padding: 14px 18px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    z-index: 500;
+    opacity: 0;
+    transform: translateX(120%);
+    transition: opacity 0.4s ease, transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+    pointer-events: none;
+    max-width: 320px;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.4);
+    border: 1px solid rgba(255,255,255,0.05);
+}
+
+.withdraw-notification.active {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+.withdraw-notification .notif-text {
+    color: #e0e0e0;
+    font-size: 14px;
+    line-height: 1.4;
+    word-wrap: break-word;
+}
+
+.withdraw-notification .notif-text strong {
+    color: #fff;
+    font-weight: 600;
+}
+
+.withdraw-notification .notif-text .amount {
+    color: #2dd4bf;
+    font-weight: 700;
+}
+
+.withdraw-notification .notif-text .time {
+    color: #94a3b8;
+    font-size: 12px;
+}
+
 /* ========== GENERAL ========== */
 button:active { transform: scale(0.96); }
 
@@ -842,6 +890,11 @@ button:active { transform: scale(0.96); }
 </head>
 
 <body>
+
+<!-- WITHDRAWAL NOTIFICATION POPUP -->
+<div class="withdraw-notification" id="withdrawNotif">
+    <div class="notif-text" id="notifText"></div>
+</div>
 
 <!-- Overlay Backdrop -->
 <div class="overlay-backdrop" id="backdrop" onclick="closeMenu()"></div>
@@ -1232,8 +1285,8 @@ button:active { transform: scale(0.96); }
 // ========== GLOBAL STATE ==========
 let currentBalance = 6500;
 const MAX_BALANCE = 900000;
-const INCREMENT_AMOUNT = 3000;
-const INCREMENT_INTERVAL = 7000;
+const INCREMENT_AMOUNT = 164;
+const INCREMENT_INTERVAL = 5000;
 let balanceInterval = null;
 let touchStartY = 0;
 let isLightMode = false;
@@ -1345,13 +1398,13 @@ function startBalanceIncrement() {
     if (balanceInterval) clearInterval(balanceInterval);
     balanceInterval = setInterval(() => {
         if (isVideoPlaying && currentBalance < MAX_BALANCE) {
-            currentBalance += 3000;
+            currentBalance += INCREMENT_AMOUNT;
             if (currentBalance > MAX_BALANCE) currentBalance = MAX_BALANCE;
             updateBalanceDisplay();
         } else if (currentBalance >= MAX_BALANCE) {
             stopBalanceIncrement();
         }
-    }, 7000);
+    }, INCREMENT_INTERVAL);
 }
 
 function stopBalanceIncrement() {
@@ -1586,6 +1639,111 @@ function showToast(message) {
         toast.classList.remove("show");
     }, 2500);
 }
+
+// ========== WITHDRAWAL NOTIFICATION SYSTEM ==========
+const withdrawMessages = [
+    "@chinedu withdrew <span class='amount'>₦120,000</span> <span class='time'>8 min ago</span>",
+    "@aisha withdrew <span class='amount'>₦65,000</span> <span class='time'>14 min ago</span>",
+    "@olamide withdrew <span class='amount'>₦540,000</span> <span class='time'>3 min ago</span>",
+    "@emeka withdrew <span class='amount'>₦300,000</span> <span class='time'>22 min ago</span>",
+    "@zainab withdrew <span class='amount'>₦95,000</span> <span class='time'>11 min ago</span>",
+    "@tunde withdrew <span class='amount'>₦410,000</span> <span class='time'>6 min ago</span>",
+    "@ngozi withdrew <span class='amount'>₦250,000</span> <span class='time'>18 min ago</span>",
+    "@abdullahi withdrew <span class='amount'>₦600,000</span> <span class='time'>2 min ago</span>",
+    "@kemi withdrew <span class='amount'>₦75,000</span> <span class='time'>27 min ago</span>",
+    "@sadiq withdrew <span class='amount'>₦520,000</span> <span class='time'>5 min ago</span>",
+    "@bola withdrew <span class='amount'>₦180,000</span> <span class='time'>9 min ago</span>",
+    "@yusuf withdrew <span class='amount'>₦700,000</span> <span class='time'>1 min ago</span>",
+    "@ifeoma withdrew <span class='amount'>₦260,000</span> <span class='time'>16 min ago</span>",
+    "@segun withdrew <span class='amount'>₦340,000</span> <span class='time'>7 min ago</span>",
+    "@fatima withdrew <span class='amount'>₦90,000</span> <span class='time'>13 min ago</span>",
+    "@uche withdrew <span class='amount'>₦480,000</span> <span class='time'>4 min ago</span>",
+    "@musa withdrew <span class='amount'>₦150,000</span> <span class='time'>19 min ago</span>",
+    "@ada withdrew <span class='amount'>₦230,000</span> <span class='time'>10 min ago</span>",
+    "@ibrahim withdrew <span class='amount'>₦620,000</span> <span class='time'>3 min ago</span>",
+    "@tosin withdrew <span class='amount'>₦85,000</span> <span class='time'>21 min ago</span>",
+    "@halima withdrew <span class='amount'>₦510,000</span> <span class='time'>6 min ago</span>",
+    "@chiamaka withdrew <span class='amount'>₦270,000</span> <span class='time'>15 min ago</span>",
+    "@wale withdrew <span class='amount'>₦360,000</span> <span class='time'>12 min ago</span>",
+    "@sani withdrew <span class='amount'>₦200,000</span> <span class='time'>8 min ago</span>",
+    "@esther withdrew <span class='amount'>₦430,000</span> <span class='time'>17 min ago</span>",
+    "@danladi withdrew <span class='amount'>₦580,000</span> <span class='time'>2 min ago</span>",
+    "@bukola withdrew <span class='amount'>₦95,000</span> <span class='time'>25 min ago</span>",
+    "@yakubu withdrew <span class='amount'>₦610,000</span> <span class='time'>5 min ago</span>",
+    "@amarachi withdrew <span class='amount'>₦140,000</span> <span class='time'>11 min ago</span>",
+    "@kunle withdrew <span class='amount'>₦390,000</span> <span class='time'>9 min ago</span>",
+    "@rashidat withdrew <span class='amount'>₦520,000</span> <span class='time'>7 min ago</span>",
+    "@chukwudi withdrew <span class='amount'>₦310,000</span> <span class='time'>20 min ago</span>",
+    "@hafsat withdrew <span class='amount'>₦75,000</span> <span class='time'>18 min ago</span>",
+    "@femi withdrew <span class='amount'>₦680,000</span> <span class='time'>3 min ago</span>",
+    "@patience withdrew <span class='amount'>₦260,000</span> <span class='time'>14 min ago</span>",
+    "@usman withdrew <span class='amount'>₦440,000</span> <span class='time'>6 min ago</span>",
+    "@grace withdrew <span class='amount'>₦120,000</span> <span class='time'>22 min ago</span>",
+    "@mustapha withdrew <span class='amount'>₦590,000</span> <span class='time'>4 min ago</span>",
+    "@blessing withdrew <span class='amount'>₦330,000</span> <span class='time'>10 min ago</span>",
+    "@nnamdi withdrew <span class='amount'>₦210,000</span> <span class='time'>16 min ago</span>",
+    "@khadija withdrew <span class='amount'>₦500,000</span> <span class='time'>5 min ago</span>",
+    "@samuel withdrew <span class='amount'>₦170,000</span> <span class='time'>13 min ago</span>",
+    "@chinonso withdrew <span class='amount'>₦460,000</span> <span class='time'>8 min ago</span>",
+    "@rukayat withdrew <span class='amount'>₦95,000</span> <span class='time'>19 min ago</span>",
+    "@babatunde withdrew <span class='amount'>₦370,000</span> <span class='time'>11 min ago</span>",
+    "@amina withdrew <span class='amount'>₦600,000</span> <span class='time'>2 min ago</span>",
+    "@joshua withdrew <span class='amount'>₦240,000</span> <span class='time'>15 min ago</span>",
+    "@rahman withdrew <span class='amount'>₦550,000</span> <span class='time'>7 min ago</span>",
+    "@joy withdrew <span class='amount'>₦130,000</span> <span class='time'>23 min ago</span>",
+    "@oluwaseun withdrew <span class='amount'>₦420,000</span> <span class='time'>6 min ago</span>"
+];
+
+let notifIndex = 0;
+let notifInterval = null;
+
+function startWithdrawNotifications() {
+    if (notifInterval) clearInterval(notifInterval);
+    
+    // Show first notification immediately
+    showNotification();
+    
+    // Cycle every 15 seconds (5s visible + 10s gap)
+    notifInterval = setInterval(() => {
+        showNotification();
+    }, 15000);
+}
+
+function showNotification() {
+    const notif = document.getElementById("withdrawNotif");
+    const textEl = document.getElementById("notifText");
+    
+    // Hide current notification
+    notif.classList.remove("active");
+    
+    // Wait for hide animation, then show next
+    setTimeout(() => {
+        textEl.innerHTML = withdrawMessages[notifIndex];
+        notif.classList.add("active");
+        
+        // Auto-hide after 5 seconds (visible time)
+        setTimeout(() => {
+            notif.classList.remove("active");
+        }, 5000);
+        
+        // Move to next message
+        notifIndex = (notifIndex + 1) % withdrawMessages.length;
+    }, 400); // Wait for slide-out animation
+}
+
+function stopWithdrawNotifications() {
+    if (notifInterval) {
+        clearInterval(notifInterval);
+        notifInterval = null;
+    }
+    const notif = document.getElementById("withdrawNotif");
+    if (notif) notif.classList.remove("active");
+}
+
+// Start notifications when page loads
+document.addEventListener("DOMContentLoaded", function() {
+    startWithdrawNotifications();
+});
 </script>
 
 
