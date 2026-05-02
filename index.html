@@ -834,6 +834,10 @@ button:active { transform: scale(0.96); }
 }
 
 .toast.show { opacity: 1; }
+
+
+/* Page 10 - History flex layout when shown */
+#page10.page { display: none; }
 </style>
 </head>
 
@@ -1151,23 +1155,11 @@ button:active { transform: scale(0.96); }
         </p>
     </div>
 
-    <!-- WITHDRAW FORM - Now part of dashboard page -->
-    <div class="withdraw-section" id="withdrawSection">
-        <div class="withdraw-form">
-            <input type="text" id="withdrawAccNum" class="dark-input" placeholder="Account Number">
-            <input type="text" id="withdrawAccName" class="dark-input" placeholder="Account Name">
-            <input type="text" id="withdrawBank" class="dark-input" placeholder="Bank Name">
-            <input type="number" id="withdrawAmount" class="dark-input" placeholder="Amount">
-
-            <button class="withdraw-btn" onclick="processWithdraw()">Withdraw</button>
-
-            <div style="text-align: center; margin-top: 20px;">
-                <button class="crypto-btn">
-                    <span class="crypto-icon">›</span>
-                    <span>Crypto</span>
-                </button>
-            </div>
-        </div>
+    <!-- WITHDRAW BUTTON -->
+    <div style="padding:0 20px 20px; margin-top:10px;">
+        <button onclick="showPage('page8')" style="width:100%; padding:16px; background:#2dd4bf; color:white; border:none; border-radius:12px; font-size:18px; font-weight:bold; cursor:pointer;">
+            💰 Withdraw Money
+        </button>
     </div>
 
     <div class="bottom-nav">
@@ -1263,6 +1255,12 @@ function showPage(id) {
     document.querySelectorAll(".page").forEach(p => p.style.display = "none");
     document.getElementById(id).style.display = "block";
     window.scrollTo(0, 0);
+
+    // Update withdraw page balance when navigating there
+    if (id === 'page8') {
+        const wb = document.getElementById("withdrawBalanceDisplay");
+        if (wb) wb.textContent = "₦ " + currentBalance.toLocaleString();
+    }
 
     // Start balance increment when on dashboard
     if (id === 'page7') {
@@ -1592,7 +1590,7 @@ function showToast(message) {
 
 
 <!-- PAGE 10 - HISTORY -->
-<div id="page10" class="page" style="min-height:100vh; display:flex; flex-direction:column;">
+<div id="page10" class="page" style="min-height:100vh; flex-direction:column;">
     <div style="background:#1e293b; padding:20px; display:flex; align-items:center; gap:15px; border-bottom:1px solid #334155;">
         <button onclick="showPage('page7')" style="background:none; border:none; color:white; font-size:20px; cursor:pointer;">←</button>
         <h2 style="color:white; margin:0; font-size:20px;">Withdrawal History</h2>
@@ -1605,6 +1603,57 @@ function showToast(message) {
             <p style="margin:0; color:#92400e; font-size:13px; line-height:1.6; text-align:center;">
                 <strong>📌 Note:</strong> If your withdrawal has not been credited to your bank account within 24 hours, please contact our support team on Telegram <strong>@costomercafe</strong> for assistance.
             </p>
+        </div>
+    </div>
+</div>
+
+
+<!-- PAGE 8 - WITHDRAW -->
+<div id="page8" class="page" style="background:#1e293b; min-height:100vh; padding-bottom:80px;">
+    <div style="background:#1e293b; padding:20px; display:flex; align-items:center; gap:15px; border-bottom:1px solid #334155;">
+        <button onclick="showPage('page7')" style="background:none; border:none; color:white; font-size:20px; cursor:pointer;">←</button>
+        <h2 style="color:white; margin:0; font-size:20px;">Withdraw</h2>
+    </div>
+
+    <div style="padding:20px; max-width:500px; margin:0 auto;">
+        <div style="background:linear-gradient(135deg, #2dd4bf, #34d399); padding:25px; border-radius:20px; color:white; margin-bottom:20px; text-align:center;">
+            <p style="margin:0 0 8px 0; font-size:14px; opacity:0.9;">Available Balance</p>
+            <h1 id="withdrawBalanceDisplay" style="margin:0; font-size:32px; font-weight:bold;">₦ 6,500</h1>
+        </div>
+
+        <div class="withdraw-form">
+            <input type="text" id="withdrawAccNum" class="dark-input" placeholder="Account Number" style="width:100%; background:transparent; border:none; border-bottom:2px solid #475569; padding:15px 0; color:white; font-size:16px; margin-bottom:20px; outline:none;">
+            <input type="text" id="withdrawAccName" class="dark-input" placeholder="Account Name" style="width:100%; background:transparent; border:none; border-bottom:2px solid #475569; padding:15px 0; color:white; font-size:16px; margin-bottom:20px; outline:none;">
+            <input type="text" id="withdrawBank" class="dark-input" placeholder="Bank Name" style="width:100%; background:transparent; border:none; border-bottom:2px solid #475569; padding:15px 0; color:white; font-size:16px; margin-bottom:20px; outline:none;">
+            <input type="number" id="withdrawAmount" class="dark-input" placeholder="Amount" style="width:100%; background:transparent; border:none; border-bottom:2px solid #475569; padding:15px 0; color:white; font-size:16px; margin-bottom:20px; outline:none;">
+
+            <button class="withdraw-btn" onclick="processWithdraw()" style="width:100%; padding:16px; background:#2dd4bf; color:white; border:none; border-radius:12px; font-size:18px; font-weight:bold; cursor:pointer; margin-top:20px;">Withdraw</button>
+
+            <div style="text-align:center; margin-top:30px;">
+                <button class="crypto-btn" style="display:inline-flex; align-items:center; gap:10px; background:#0f172a; color:white; border:none; padding:12px 24px; border-radius:30px; cursor:pointer; font-size:16px;">
+                    <span class="crypto-icon" style="width:36px; height:36px; background:#2dd4bf; border-radius:50%; display:flex; align-items:center; justify-content:center; color:white; font-size:18px;">›</span>
+                    <span>Crypto</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div class="bottom-nav">
+        <div class="nav-item active" onclick="showNav('home')">
+            <span>🏠</span>
+            <span>Home</span>
+        </div>
+        <div class="nav-item" onclick="showNav('profile')">
+            <span>👤</span>
+            <span>Profile</span>
+        </div>
+        <div class="nav-item" onclick="showNav('history')">
+            <span>📜</span>
+            <span>History</span>
+        </div>
+        <div class="nav-item" onclick="showNav('support')">
+            <span>🎧</span>
+            <span>Support</span>
         </div>
     </div>
 </div>
