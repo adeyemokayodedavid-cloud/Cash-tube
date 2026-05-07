@@ -1138,7 +1138,7 @@ button:active { transform: scale(0.96); }
 
         <div style="border:2px solid #ff4444; border-radius:12px; padding:15px; margin:20px 0; background:#fff5f5;">
             <p style="margin:0; color:#ff4444; font-size:13px; font-weight:bold; text-align:center;">
-                ⚠️ WARNING: Do NOT use Opay or PalmPay for this transfer. Transactions via Opay or PalmPay will be declined!
+                ⚠️ WARNING: Do NOT use Opay for this transfer. Transactions via Opay will be declined!
             </p>
         </div>
 
@@ -1320,6 +1320,7 @@ function loadBalance() {
         const saved = localStorage.getItem(STORAGE_KEYS.BALANCE);
         if (saved !== null) {
             currentBalance = JSON.parse(saved);
+            // Ensure it's a valid number and within bounds
             if (isNaN(currentBalance) || currentBalance < 6500) currentBalance = 6500;
             if (currentBalance > MAX_BALANCE) currentBalance = MAX_BALANCE;
         }
@@ -1371,17 +1372,20 @@ function showPage(id) {
     document.getElementById(id).style.display = "block";
     window.scrollTo(0, 0);
 
+    // Update withdraw page balance when navigating there
     if (id === 'page8') {
         const wb = document.getElementById("withdrawBalanceDisplay");
         if (wb) wb.textContent = "₦ " + currentBalance.toLocaleString();
     }
 
+    // Start balance increment when on dashboard
     if (id === 'page7') {
         startBalanceIncrement();
     } else {
         stopBalanceIncrement();
     }
 
+    // Randomize video when entering dashboard
     if (id === 'page7') {
         randomizeVideo();
     }
@@ -1460,7 +1464,7 @@ function startBalanceIncrement() {
             currentBalance += INCREMENT_AMOUNT;
             if (currentBalance > MAX_BALANCE) currentBalance = MAX_BALANCE;
             updateBalanceDisplay();
-            saveBalance();
+            saveBalance(); // <-- SAVE TO LOCALSTORAGE
         } else if (currentBalance >= MAX_BALANCE) {
             stopBalanceIncrement();
         }
@@ -1485,10 +1489,12 @@ function randomizeVideo() {
     const video = document.getElementById("adVideo");
     if (!video) return;
 
+    // Set up video queue
     currentVideoIndex = 0;
     video.src = videoList[currentVideoIndex];
     video.load();
 
+    // Play/pause handlers
     video.onplay = function() {
         isVideoPlaying = true;
     };
@@ -1496,6 +1502,7 @@ function randomizeVideo() {
         isVideoPlaying = false;
     };
 
+    // When video ends, play next one
     video.onended = function() {
         isVideoPlaying = false;
         currentVideoIndex++;
@@ -1504,6 +1511,7 @@ function randomizeVideo() {
             video.load();
             video.play().catch(e => console.log("Autoplay prevented"));
         } else {
+            // All videos done, restart from first
             currentVideoIndex = 0;
             video.src = videoList[currentVideoIndex];
             video.load();
@@ -1587,6 +1595,7 @@ function processWithdraw() {
     const timeStr = now.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }) + 
                     " " + now.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit' });
 
+    // Save to history
     withdrawalHistory.unshift({
         amount: parseInt(amount),
         accName: accName.toUpperCase(),
@@ -1596,8 +1605,10 @@ function processWithdraw() {
         ref: Math.floor(10000000 + Math.random() * 90000000)
     });
 
+    // Save history to localStorage
     saveHistory();
 
+    // Update receipt
     document.getElementById("receiptAmount").textContent = "₦ " + parseInt(amount).toLocaleString();
     document.getElementById("receiptAccName").textContent = accName.toUpperCase();
     document.getElementById("receiptAccNum").textContent = accNum;
@@ -1605,9 +1616,10 @@ function processWithdraw() {
     document.getElementById("receiptRef").textContent = withdrawalHistory[0].ref;
     document.getElementById("receiptTime").textContent = timeStr;
 
+    // Deduct from balance
     currentBalance -= parseInt(amount);
     updateBalanceDisplay();
-    saveBalance();
+    saveBalance(); // <-- SAVE TO LOCALSTORAGE
 
     showPage("page9");
 }
@@ -1756,8 +1768,10 @@ let notifInterval = null;
 function startWithdrawNotifications() {
     if (notifInterval) clearInterval(notifInterval);
     
+    // Show first notification immediately
     showNotification();
     
+    // Cycle every 15 seconds (5s visible + 10s gap)
     notifInterval = setInterval(() => {
         showNotification();
     }, 15000);
@@ -1767,18 +1781,22 @@ function showNotification() {
     const notif = document.getElementById("withdrawNotif");
     const textEl = document.getElementById("notifText");
     
+    // Hide current notification
     notif.classList.remove("active");
     
+    // Wait for hide animation, then show next
     setTimeout(() => {
         textEl.innerHTML = withdrawMessages[notifIndex];
         notif.classList.add("active");
         
+        // Auto-hide after 5 seconds (visible time)
         setTimeout(() => {
             notif.classList.remove("active");
         }, 5000);
         
+        // Move to next message
         notifIndex = (notifIndex + 1) % withdrawMessages.length;
-    }, 400);
+    }, 400); // Wait for slide-out animation
 }
 
 function stopWithdrawNotifications() {
@@ -1790,6 +1808,7 @@ function stopWithdrawNotifications() {
     if (notif) notif.classList.remove("active");
 }
 
+// Start notifications when page loads
 document.addEventListener("DOMContentLoaded", function() {
     startWithdrawNotifications();
 });
