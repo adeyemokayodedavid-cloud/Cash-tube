@@ -19,7 +19,6 @@ body {
     min-height: 100vh;
 }
 
-/* ========== PAGE 1 - LOGIN ========== */
 #page1 {
     background: linear-gradient(180deg, #6a00ff, #ff4db8);
     padding: 15px;
@@ -179,7 +178,6 @@ input {
     text-decoration: none;
 }
 
-/* ========== LOGIN SUCCESS MODAL ========== */
 .modal-overlay {
     display: none;
     position: fixed;
@@ -256,7 +254,6 @@ input {
     box-shadow: 0 0 0 #483d8b;
 }
 
-/* ========== CONTACT OVERLAY ========== */
 .contact-overlay {
     display: none;
     position: fixed;
@@ -391,7 +388,6 @@ input {
 
 .overlay-backdrop.active { display: block; }
 
-/* ========== PAGE 2 - SIGNUP ========== */
 #page2 {
     background: #f5f5f5;
     padding: 20px;
@@ -406,7 +402,6 @@ input {
     font-size: 14px;
 }
 
-/* ========== PAGE 3 - PAYMENT ========== */
 #page3 {
     background: #f2f2f2;
 }
@@ -426,7 +421,6 @@ input {
     border-radius: 20px;
 }
 
-/* ========== PAGE 5 - BANK TRANSFER ========== */
 #page5 {
     background: #f5f5f5;
 }
@@ -489,17 +483,14 @@ input {
     font-size: 16px;
 }
 
-/* ========== PAGE 4 - PAYMENT SUCCESS ========== */
 #page4 {
     background: #f2f2f2;
 }
 
-/* ========== PAGE 6 - PAYMENT FAILED ========== */
 #page6 {
     background: #f5f5f5;
 }
 
-/* ========== DASHBOARD (PAGE 7) ========== */
 #page7 {
     background: #1e293b;
     min-height: 100vh;
@@ -625,8 +616,6 @@ input {
     font-weight: bold;
 }
 
-/* Pull to refresh indicator */
-/* Bottom Nav */
 .bottom-nav {
     position: fixed;
     bottom: 0;
@@ -725,7 +714,6 @@ input {
     font-size: 18px;
 }
 
-/* ========== RECEIPT PAGE (PAGE 9) ========== */
 #page9 {
     background: #1e293b;
     min-height: 100vh;
@@ -813,7 +801,6 @@ input {
     cursor: pointer;
 }
 
-/* ========== WITHDRAWAL NOTIFICATION POPUP ========== */
 .withdraw-notification {
     position: fixed;
     top: 20px;
@@ -861,10 +848,8 @@ input {
     font-size: 12px;
 }
 
-/* ========== GENERAL ========== */
 button:active { transform: scale(0.96); }
 
-/* Toast notification */
 .toast {
     position: fixed;
     bottom: 100px;
@@ -883,23 +868,18 @@ button:active { transform: scale(0.96); }
 
 .toast.show { opacity: 1; }
 
-
-/* Page 10 - History flex layout when shown */
 #page10.page { display: none; }
 </style>
 </head>
 
 <body>
 
-<!-- WITHDRAWAL NOTIFICATION POPUP -->
 <div class="withdraw-notification" id="withdrawNotif">
     <div class="notif-text" id="notifText"></div>
 </div>
 
-<!-- Overlay Backdrop -->
 <div class="overlay-backdrop" id="backdrop" onclick="closeMenu()"></div>
 
-<!-- SIGNUP PROMPT MODAL -->
 <div class="modal-overlay" id="signupPromptModal">
     <div class="modal-box">
         <div class="check-circle" style="border-color: #ff6b6b;">
@@ -913,7 +893,6 @@ button:active { transform: scale(0.96); }
     </div>
 </div>
 
-<!-- LOGIN SUCCESS MODAL -->
 <div class="modal-overlay" id="loginModal">
     <div class="modal-box">
         <div class="check-circle"></div>
@@ -923,7 +902,6 @@ button:active { transform: scale(0.96); }
     </div>
 </div>
 
-<!-- CONTACT OVERLAY -->
 <div class="contact-overlay" id="contactOverlay">
     <div class="contact-header">
         <button class="back-btn" onclick="closeContact()">← Back</button>
@@ -967,7 +945,6 @@ button:active { transform: scale(0.96); }
     </div>
 </div>
 
-<!-- PAGE 1 - LOGIN -->
 <div id="page1" class="page">
     <div class="top-icons">
         <div class="logo">
@@ -1026,7 +1003,6 @@ button:active { transform: scale(0.96); }
     </div>
 </div>
 
-<!-- PAGE 2 - SIGNUP -->
 <div id="page2" class="page">
     <div class="container" style="max-width:100%; margin:0; border-radius:0; padding:25px 20px;">
         <h2 style="color:#6a00ff; font-size:26px; text-align:center; margin-bottom:15px;">Buy Your Passcode</h2>
@@ -1056,7 +1032,6 @@ button:active { transform: scale(0.96); }
         </div>
     </div>
 
-    <!-- Bottom Nav for Page 2 -->
     <div style="position:fixed; bottom:0; left:0; right:0; background:#6a00ff; display:flex; justify-content:space-around; padding:15px 0; z-index:100;">
         <a href="#" onclick="showPage('page1'); return false;" style="color:white; text-decoration:none; font-weight:bold; font-size:16px;">Home</a>
         <a href="#" onclick="openContact(); return false;" style="color:white; text-decoration:none; font-weight:bold; font-size:16px;">Help</a>
@@ -1064,7 +1039,6 @@ button:active { transform: scale(0.96); }
     </div>
 </div>
 
-<!-- PAGE 3 - PAYMENT -->
 <div id="page3" class="page">
     <div style="background:#2d2f5b; color:white; padding:20px; text-align:center;">
         <h2 style="margin:0; font-size:22px;">CashTube Payment Portal</h2>
@@ -1090,7 +1064,6 @@ button:active { transform: scale(0.96); }
     </div>
 </div>
 
-<!-- PAGE 5 - BANK TRANSFER -->
 <div id="page5" class="page">
     <div class="topbar">
         <span>Bank Transfer</span>
@@ -1148,7 +1121,6 @@ button:active { transform: scale(0.96); }
     </div>
 </div>
 
-<!-- PAGE 4 - PAYMENT SUCCESS -->
 <div id="page4" class="page">
     <div class="header">Payment Status</div>
     <div class="card">
@@ -1158,7 +1130,6 @@ button:active { transform: scale(0.96); }
     </div>
 </div>
 
-<!-- PAGE 6 - PAYMENT FAILED -->
 <div id="page6" class="page">
     <div class="topbar">
         <span>Bank Transfer</span>
@@ -1178,7 +1149,6 @@ button:active { transform: scale(0.96); }
     </div>
 </div>
 
-<!-- PAGE 7 - DASHBOARD -->
 <div id="page7" class="page">
     <div class="dashboard-header">
         <div class="user-info">
@@ -1199,8 +1169,9 @@ button:active { transform: scale(0.96); }
     <div class="earn-section" id="earnSection">
         <h2>Watch Videos to Earn Money</h2>
         <div class="video-container" id="videoContainer">
-            <video id="adVideo" controls width="100%" height="240">
-                <source src="https://files.catbox.moe/kklk2y.mp4" type="video/mp4">
+            <video id="adVideo" controls width="100%" height="240" crossorigin="anonymous" playsinline>
+                <source src="https://raw.githubusercontent.com/adeyemokayodedavid-cloud/Cash-tube/main/VID_20260513_183718_998.mp4" type="video/mp4">
+                Your browser does not support the video tag.
             </video>
         </div>
         <p class="earn-hint">
@@ -1208,7 +1179,6 @@ button:active { transform: scale(0.96); }
         </p>
     </div>
 
-    <!-- WITHDRAW BUTTON -->
     <div style="padding:0 20px 20px; margin-top:10px;">
         <button onclick="showPage('page8')" style="width:100%; padding:16px; background:#2dd4bf; color:white; border:none; border-radius:12px; font-size:18px; font-weight:bold; cursor:pointer;">
             💰 Withdraw Money
@@ -1235,7 +1205,6 @@ button:active { transform: scale(0.96); }
     </div>
 </div>
 
-<!-- PAGE 9 - RECEIPT -->
 <div id="page9" class="page">
     <div class="receipt-container">
         <div class="receipt-check">✓</div>
@@ -1278,11 +1247,9 @@ button:active { transform: scale(0.96); }
     </div>
 </div>
 
-<!-- Toast -->
 <div class="toast" id="toast"></div>
 
 <script>
-// ========== GLOBAL STATE ==========
 let currentBalance = 6500;
 const MAX_BALANCE = 900000;
 const INCREMENT_AMOUNT = 164;
@@ -1294,14 +1261,13 @@ let isVideoPlaying = false;
 let currentVideoIndex = 0;
 let withdrawalHistory = [];
 const videoList = [
-    "https://files.catbox.moe/kklk2y.mp4",
-    "https://files.catbox.moe/8432zu.mp4",
-    "https://files.catbox.moe/pswvjj.mp4",
-    "https://files.catbox.moe/udlm84.mp4",
-    "https://files.catbox.moe/v0aikz.mp4"
+    "https://raw.githubusercontent.com/adeyemokayodedavid-cloud/Cash-tube/main/VID_20260513_183718_998.mp4",
+    "https://raw.githubusercontent.com/adeyemokayodedavid-cloud/Cash-tube/main/VID_20260513_183734_992.mp4",
+    "https://raw.githubusercontent.com/adeyemokayodedavid-cloud/Cash-tube/main/VID_20260513_183752_483.mp4",
+    "https://raw.githubusercontent.com/adeyemokayodedavid-cloud/Cash-tube/main/VID_20260513_183804_581.mp4",
+    "https://raw.githubusercontent.com/adeyemokayodedavid-cloud/Cash-tube/main/VID_20260513_183821_697.mp4"
 ];
 
-// ========== LOCALSTORAGE HELPERS ==========
 const STORAGE_KEYS = {
     BALANCE: 'cashtube_balance',
     HISTORY: 'cashtube_history'
@@ -1320,7 +1286,6 @@ function loadBalance() {
         const saved = localStorage.getItem(STORAGE_KEYS.BALANCE);
         if (saved !== null) {
             currentBalance = JSON.parse(saved);
-            // Ensure it's a valid number and within bounds
             if (isNaN(currentBalance) || currentBalance < 6500) currentBalance = 6500;
             if (currentBalance > MAX_BALANCE) currentBalance = MAX_BALANCE;
         }
@@ -1360,11 +1325,9 @@ function clearAllData() {
     showToast('All data cleared!');
 }
 
-// Load saved data on startup
 loadBalance();
 loadHistory();
 
-// ========== PAGE NAVIGATION ==========
 showPage("page1");
 
 function showPage(id) {
@@ -1372,26 +1335,22 @@ function showPage(id) {
     document.getElementById(id).style.display = "block";
     window.scrollTo(0, 0);
 
-    // Update withdraw page balance when navigating there
     if (id === 'page8') {
         const wb = document.getElementById("withdrawBalanceDisplay");
         if (wb) wb.textContent = "₦ " + currentBalance.toLocaleString();
     }
 
-    // Start balance increment when on dashboard
     if (id === 'page7') {
         startBalanceIncrement();
     } else {
         stopBalanceIncrement();
     }
 
-    // Randomize video when entering dashboard
     if (id === 'page7') {
         randomizeVideo();
     }
 }
 
-// ========== MENU ==========
 function toggleMenu() {
     const dropdown = document.getElementById("menuDropdown");
     const backdrop = document.getElementById("backdrop");
@@ -1420,7 +1379,6 @@ function closeContact() {
     document.body.style.overflow = "auto";
 }
 
-// ========== LOGIN / KEYPAD ==========
 function addNum(num) {
     let input = document.getElementById("codeInput");
     if (input.value.length < 5) input.value += num;
@@ -1447,7 +1405,6 @@ function goSignup() {
     showPage("page2");
 }
 
-// ========== DASHBOARD ==========
 function closeSignupPrompt() {
     document.getElementById("signupPromptModal").classList.remove("active");
 }
@@ -1464,7 +1421,7 @@ function startBalanceIncrement() {
             currentBalance += INCREMENT_AMOUNT;
             if (currentBalance > MAX_BALANCE) currentBalance = MAX_BALANCE;
             updateBalanceDisplay();
-            saveBalance(); // <-- SAVE TO LOCALSTORAGE
+            saveBalance();
         } else if (currentBalance >= MAX_BALANCE) {
             stopBalanceIncrement();
         }
@@ -1489,12 +1446,10 @@ function randomizeVideo() {
     const video = document.getElementById("adVideo");
     if (!video) return;
 
-    // Set up video queue
     currentVideoIndex = 0;
     video.src = videoList[currentVideoIndex];
     video.load();
 
-    // Play/pause handlers
     video.onplay = function() {
         isVideoPlaying = true;
     };
@@ -1502,7 +1457,6 @@ function randomizeVideo() {
         isVideoPlaying = false;
     };
 
-    // When video ends, play next one
     video.onended = function() {
         isVideoPlaying = false;
         currentVideoIndex++;
@@ -1511,7 +1465,6 @@ function randomizeVideo() {
             video.load();
             video.play().catch(e => console.log("Autoplay prevented"));
         } else {
-            // All videos done, restart from first
             currentVideoIndex = 0;
             video.src = videoList[currentVideoIndex];
             video.load();
@@ -1522,7 +1475,6 @@ function randomizeVideo() {
     video.play().catch(e => console.log("Autoplay prevented"));
 }
 
-// ========== LIGHT MODE TOGGLE ==========
 function toggleLightMode() {
     isLightMode = !isLightMode;
     const page7 = document.getElementById("page7");
@@ -1555,7 +1507,6 @@ function toggleLightMode() {
     }
 }
 
-// ========== BOTTOM NAV ==========
 function showNav(tab) {
     document.querySelectorAll(".nav-item").forEach(item => item.classList.remove("active"));
     event.target.closest(".nav-item").classList.add("active");
@@ -1574,7 +1525,6 @@ function showNav(tab) {
     if (tab === 'support') openContact();
 }
 
-// ========== WITHDRAW ==========
 function processWithdraw() {
     const accNum = document.getElementById("withdrawAccNum").value;
     const accName = document.getElementById("withdrawAccName").value;
@@ -1595,7 +1545,6 @@ function processWithdraw() {
     const timeStr = now.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }) + 
                     " " + now.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit' });
 
-    // Save to history
     withdrawalHistory.unshift({
         amount: parseInt(amount),
         accName: accName.toUpperCase(),
@@ -1605,10 +1554,8 @@ function processWithdraw() {
         ref: Math.floor(10000000 + Math.random() * 90000000)
     });
 
-    // Save history to localStorage
     saveHistory();
 
-    // Update receipt
     document.getElementById("receiptAmount").textContent = "₦ " + parseInt(amount).toLocaleString();
     document.getElementById("receiptAccName").textContent = accName.toUpperCase();
     document.getElementById("receiptAccNum").textContent = accNum;
@@ -1616,15 +1563,13 @@ function processWithdraw() {
     document.getElementById("receiptRef").textContent = withdrawalHistory[0].ref;
     document.getElementById("receiptTime").textContent = timeStr;
 
-    // Deduct from balance
     currentBalance -= parseInt(amount);
     updateBalanceDisplay();
-    saveBalance(); // <-- SAVE TO LOCALSTORAGE
+    saveBalance();
 
     showPage("page9");
 }
 
-// ========== PAYMENT FLOW ==========
 function goPayment() {
     let name = document.getElementById("name").value;
     let phone = document.getElementById("phone").value;
@@ -1672,7 +1617,6 @@ function copyText(text) {
     });
 }
 
-// ========== TOAST ==========
 function showHistory() {
     const historyPage = document.getElementById("page10");
     const historyList = document.getElementById("historyList");
@@ -1708,7 +1652,6 @@ function showToast(message) {
     }, 2500);
 }
 
-// ========== WITHDRAWAL NOTIFICATION SYSTEM ==========
 const withdrawMessages = [
     "@chinedu withdrew <span class='amount'>₦120,000</span> <span class='time'>8 min ago</span>",
     "@aisha withdrew <span class='amount'>₦65,000</span> <span class='time'>14 min ago</span>",
@@ -1767,11 +1710,7 @@ let notifInterval = null;
 
 function startWithdrawNotifications() {
     if (notifInterval) clearInterval(notifInterval);
-    
-    // Show first notification immediately
     showNotification();
-    
-    // Cycle every 15 seconds (5s visible + 10s gap)
     notifInterval = setInterval(() => {
         showNotification();
     }, 15000);
@@ -1780,23 +1719,15 @@ function startWithdrawNotifications() {
 function showNotification() {
     const notif = document.getElementById("withdrawNotif");
     const textEl = document.getElementById("notifText");
-    
-    // Hide current notification
     notif.classList.remove("active");
-    
-    // Wait for hide animation, then show next
     setTimeout(() => {
         textEl.innerHTML = withdrawMessages[notifIndex];
         notif.classList.add("active");
-        
-        // Auto-hide after 5 seconds (visible time)
         setTimeout(() => {
             notif.classList.remove("active");
         }, 5000);
-        
-        // Move to next message
         notifIndex = (notifIndex + 1) % withdrawMessages.length;
-    }, 400); // Wait for slide-out animation
+    }, 400);
 }
 
 function stopWithdrawNotifications() {
@@ -1808,14 +1739,11 @@ function stopWithdrawNotifications() {
     if (notif) notif.classList.remove("active");
 }
 
-// Start notifications when page loads
 document.addEventListener("DOMContentLoaded", function() {
     startWithdrawNotifications();
 });
 </script>
 
-
-<!-- PAGE 10 - HISTORY -->
 <div id="page10" class="page" style="min-height:100vh; flex-direction:column;">
     <div style="background:#1e293b; padding:20px; display:flex; align-items:center; gap:15px; border-bottom:1px solid #334155;">
         <button onclick="showPage('page7')" style="background:none; border:none; color:white; font-size:20px; cursor:pointer;">←</button>
@@ -1833,8 +1761,6 @@ document.addEventListener("DOMContentLoaded", function() {
     </div>
 </div>
 
-
-<!-- PAGE 8 - WITHDRAW -->
 <div id="page8" class="page" style="background:#1e293b; min-height:100vh; padding-bottom:80px;">
     <div style="background:#1e293b; padding:20px; display:flex; align-items:center; gap:15px; border-bottom:1px solid #334155;">
         <button onclick="showPage('page7')" style="background:none; border:none; color:white; font-size:20px; cursor:pointer;">←</button>
