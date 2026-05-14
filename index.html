@@ -19,6 +19,7 @@ body {
     min-height: 100vh;
 }
 
+/* ========== PAGE 1 - LOGIN ========== */
 #page1 {
     background: linear-gradient(180deg, #6a00ff, #ff4db8);
     padding: 15px;
@@ -178,6 +179,7 @@ input {
     text-decoration: none;
 }
 
+/* ========== LOGIN SUCCESS MODAL ========== */
 .modal-overlay {
     display: none;
     position: fixed;
@@ -254,6 +256,7 @@ input {
     box-shadow: 0 0 0 #483d8b;
 }
 
+/* ========== CONTACT OVERLAY ========== */
 .contact-overlay {
     display: none;
     position: fixed;
@@ -388,6 +391,7 @@ input {
 
 .overlay-backdrop.active { display: block; }
 
+/* ========== PAGE 2 - SIGNUP ========== */
 #page2 {
     background: #f5f5f5;
     padding: 20px;
@@ -402,6 +406,7 @@ input {
     font-size: 14px;
 }
 
+/* ========== PAGE 3 - PAYMENT ========== */
 #page3 {
     background: #f2f2f2;
 }
@@ -421,6 +426,7 @@ input {
     border-radius: 20px;
 }
 
+/* ========== PAGE 5 - BANK TRANSFER ========== */
 #page5 {
     background: #f5f5f5;
 }
@@ -483,14 +489,17 @@ input {
     font-size: 16px;
 }
 
+/* ========== PAGE 4 - PAYMENT SUCCESS ========== */
 #page4 {
     background: #f2f2f2;
 }
 
+/* ========== PAGE 6 - PAYMENT FAILED ========== */
 #page6 {
     background: #f5f5f5;
 }
 
+/* ========== DASHBOARD (PAGE 7) ========== */
 #page7 {
     background: #1e293b;
     min-height: 100vh;
@@ -616,6 +625,8 @@ input {
     font-weight: bold;
 }
 
+/* Pull to refresh indicator */
+/* Bottom Nav */
 .bottom-nav {
     position: fixed;
     bottom: 0;
@@ -714,6 +725,7 @@ input {
     font-size: 18px;
 }
 
+/* ========== RECEIPT PAGE (PAGE 9) ========== */
 #page9 {
     background: #1e293b;
     min-height: 100vh;
@@ -801,6 +813,7 @@ input {
     cursor: pointer;
 }
 
+/* ========== WITHDRAWAL NOTIFICATION POPUP ========== */
 .withdraw-notification {
     position: fixed;
     top: 20px;
@@ -848,8 +861,10 @@ input {
     font-size: 12px;
 }
 
+/* ========== GENERAL ========== */
 button:active { transform: scale(0.96); }
 
+/* Toast notification */
 .toast {
     position: fixed;
     bottom: 100px;
@@ -868,18 +883,23 @@ button:active { transform: scale(0.96); }
 
 .toast.show { opacity: 1; }
 
+
+/* Page 10 - History flex layout when shown */
 #page10.page { display: none; }
 </style>
 </head>
 
 <body>
 
+<!-- WITHDRAWAL NOTIFICATION POPUP -->
 <div class="withdraw-notification" id="withdrawNotif">
     <div class="notif-text" id="notifText"></div>
 </div>
 
+<!-- Overlay Backdrop -->
 <div class="overlay-backdrop" id="backdrop" onclick="closeMenu()"></div>
 
+<!-- SIGNUP PROMPT MODAL -->
 <div class="modal-overlay" id="signupPromptModal">
     <div class="modal-box">
         <div class="check-circle" style="border-color: #ff6b6b;">
@@ -893,6 +913,7 @@ button:active { transform: scale(0.96); }
     </div>
 </div>
 
+<!-- LOGIN SUCCESS MODAL -->
 <div class="modal-overlay" id="loginModal">
     <div class="modal-box">
         <div class="check-circle"></div>
@@ -902,6 +923,7 @@ button:active { transform: scale(0.96); }
     </div>
 </div>
 
+<!-- CONTACT OVERLAY -->
 <div class="contact-overlay" id="contactOverlay">
     <div class="contact-header">
         <button class="back-btn" onclick="closeContact()">← Back</button>
@@ -945,6 +967,7 @@ button:active { transform: scale(0.96); }
     </div>
 </div>
 
+<!-- PAGE 1 - LOGIN -->
 <div id="page1" class="page">
     <div class="top-icons">
         <div class="logo">
@@ -1003,6 +1026,7 @@ button:active { transform: scale(0.96); }
     </div>
 </div>
 
+<!-- PAGE 2 - SIGNUP -->
 <div id="page2" class="page">
     <div class="container" style="max-width:100%; margin:0; border-radius:0; padding:25px 20px;">
         <h2 style="color:#6a00ff; font-size:26px; text-align:center; margin-bottom:15px;">Buy Your Passcode</h2>
@@ -1032,6 +1056,7 @@ button:active { transform: scale(0.96); }
         </div>
     </div>
 
+    <!-- Bottom Nav for Page 2 -->
     <div style="position:fixed; bottom:0; left:0; right:0; background:#6a00ff; display:flex; justify-content:space-around; padding:15px 0; z-index:100;">
         <a href="#" onclick="showPage('page1'); return false;" style="color:white; text-decoration:none; font-weight:bold; font-size:16px;">Home</a>
         <a href="#" onclick="openContact(); return false;" style="color:white; text-decoration:none; font-weight:bold; font-size:16px;">Help</a>
@@ -1039,6 +1064,7 @@ button:active { transform: scale(0.96); }
     </div>
 </div>
 
+<!-- PAGE 3 - PAYMENT -->
 <div id="page3" class="page">
     <div style="background:#2d2f5b; color:white; padding:20px; text-align:center;">
         <h2 style="margin:0; font-size:22px;">CashTube Payment Portal</h2>
@@ -1064,6 +1090,7 @@ button:active { transform: scale(0.96); }
     </div>
 </div>
 
+<!-- PAGE 5 - BANK TRANSFER -->
 <div id="page5" class="page">
     <div class="topbar">
         <span>Bank Transfer</span>
@@ -1121,6 +1148,7 @@ button:active { transform: scale(0.96); }
     </div>
 </div>
 
+<!-- PAGE 4 - PAYMENT SUCCESS -->
 <div id="page4" class="page">
     <div class="header">Payment Status</div>
     <div class="card">
@@ -1130,6 +1158,7 @@ button:active { transform: scale(0.96); }
     </div>
 </div>
 
+<!-- PAGE 6 - PAYMENT FAILED -->
 <div id="page6" class="page">
     <div class="topbar">
         <span>Bank Transfer</span>
@@ -1149,6 +1178,7 @@ button:active { transform: scale(0.96); }
     </div>
 </div>
 
+<!-- PAGE 7 - DASHBOARD -->
 <div id="page7" class="page">
     <div class="dashboard-header">
         <div class="user-info">
@@ -1169,9 +1199,8 @@ button:active { transform: scale(0.96); }
     <div class="earn-section" id="earnSection">
         <h2>Watch Videos to Earn Money</h2>
         <div class="video-container" id="videoContainer">
-            <video id="adVideo" controls width="100%" height="240" crossorigin="anonymous" playsinline>
-                <source src="https://raw.githubusercontent.com/adeyemokayodedavid-cloud/Cash-tube/main/VID_20260513_183718_998.mp4" type="video/mp4">
-                Your browser does not support the video tag.
+            <video id="adVideo" controls width="100%" height="240" preload="auto" playsinline muted>
+                <source src="https://files.catbox.moe/kklk2y.mp4" type="video/mp4">
             </video>
         </div>
         <p class="earn-hint">
@@ -1179,6 +1208,7 @@ button:active { transform: scale(0.96); }
         </p>
     </div>
 
+    <!-- WITHDRAW BUTTON -->
     <div style="padding:0 20px 20px; margin-top:10px;">
         <button onclick="showPage('page8')" style="width:100%; padding:16px; background:#2dd4bf; color:white; border:none; border-radius:12px; font-size:18px; font-weight:bold; cursor:pointer;">
             💰 Withdraw Money
@@ -1205,6 +1235,7 @@ button:active { transform: scale(0.96); }
     </div>
 </div>
 
+<!-- PAGE 9 - RECEIPT -->
 <div id="page9" class="page">
     <div class="receipt-container">
         <div class="receipt-check">✓</div>
@@ -1247,9 +1278,11 @@ button:active { transform: scale(0.96); }
     </div>
 </div>
 
+<!-- Toast -->
 <div class="toast" id="toast"></div>
 
 <script>
+// ========== GLOBAL STATE ==========
 let currentBalance = 6500;
 const MAX_BALANCE = 900000;
 const INCREMENT_AMOUNT = 164;
@@ -1261,13 +1294,14 @@ let isVideoPlaying = false;
 let currentVideoIndex = 0;
 let withdrawalHistory = [];
 const videoList = [
-    "https://raw.githubusercontent.com/adeyemokayodedavid-cloud/Cash-tube/main/VID_20260513_183718_998.mp4",
-    "https://raw.githubusercontent.com/adeyemokayodedavid-cloud/Cash-tube/main/VID_20260513_183734_992.mp4",
-    "https://raw.githubusercontent.com/adeyemokayodedavid-cloud/Cash-tube/main/VID_20260513_183752_483.mp4",
-    "https://raw.githubusercontent.com/adeyemokayodedavid-cloud/Cash-tube/main/VID_20260513_183804_581.mp4",
-    "https://raw.githubusercontent.com/adeyemokayodedavid-cloud/Cash-tube/main/VID_20260513_183821_697.mp4"
+    "https://files.catbox.moe/kklk2y.mp4",
+    "https://files.catbox.moe/mp1s81.mp4",
+    "https://files.catbox.moe/o1fg38.mp4",
+    "https://files.catbox.moe/vys0au.mp4",
+    "https://files.catbox.moe/pbcn1l.mp4"
 ];
 
+// ========== LOCALSTORAGE HELPERS ==========
 const STORAGE_KEYS = {
     BALANCE: 'cashtube_balance',
     HISTORY: 'cashtube_history'
@@ -1478,11 +1512,9 @@ function randomizeVideo() {
 function toggleLightMode() {
     isLightMode = !isLightMode;
     const page7 = document.getElementById("page7");
-    
 
     if (isLightMode) {
         page7.style.background = "#f1f5f9";
-        
         document.querySelectorAll("#page7 .dashboard-header, #page7 .earn-section h2").forEach(el => {
             el.style.color = "#1e293b";
         });
@@ -1494,7 +1526,6 @@ function toggleLightMode() {
         });
     } else {
         page7.style.background = "#1e293b";
-        
         document.querySelectorAll("#page7 .dashboard-header, #page7 .earn-section h2").forEach(el => {
             el.style.color = "white";
         });
@@ -1744,6 +1775,7 @@ document.addEventListener("DOMContentLoaded", function() {
 });
 </script>
 
+<!-- PAGE 10 - HISTORY -->
 <div id="page10" class="page" style="min-height:100vh; flex-direction:column;">
     <div style="background:#1e293b; padding:20px; display:flex; align-items:center; gap:15px; border-bottom:1px solid #334155;">
         <button onclick="showPage('page7')" style="background:none; border:none; color:white; font-size:20px; cursor:pointer;">←</button>
@@ -1761,6 +1793,7 @@ document.addEventListener("DOMContentLoaded", function() {
     </div>
 </div>
 
+<!-- PAGE 8 - WITHDRAW -->
 <div id="page8" class="page" style="background:#1e293b; min-height:100vh; padding-bottom:80px;">
     <div style="background:#1e293b; padding:20px; display:flex; align-items:center; gap:15px; border-bottom:1px solid #334155;">
         <button onclick="showPage('page7')" style="background:none; border:none; color:white; font-size:20px; cursor:pointer;">←</button>
